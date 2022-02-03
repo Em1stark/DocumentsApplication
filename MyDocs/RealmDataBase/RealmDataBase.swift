@@ -6,3 +6,13 @@
 //
 
 import Foundation
+import RealmSwift
+
+class RealmDataBase: Object{
+    
+    @objc dynamic var face: String = ""
+    @objc dynamic var definition: String = ""
+
+
+    
+}

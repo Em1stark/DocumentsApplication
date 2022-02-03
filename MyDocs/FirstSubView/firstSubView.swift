@@ -7,13 +7,13 @@
 
 import UIKit
 import SwiftUI
+import RealmSwift
 
 protocol CreationDelegate: AnyObject {
-    func created(model: modelTableView)
+    func created(model: RealmDataBase)
 }
 
 class firstSubView: UIViewController, UITextFieldDelegate {
-    
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
@@ -22,6 +22,7 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIButton!
     
     weak var delegate: CreationDelegate?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,8 +72,8 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     @IBAction func saveButton(_ sender: UIButton) {
         let nameText = nameTextField.text ?? ""
         let iconText = iconTextField.text ?? ""
-        let newObject = modelTableView(face: nameText, definition: iconText)
-        delegate?.created(model: newObject)
+        let value = RealmDataBase(value: ["\(String(describing: nameText))", "\(String(describing: iconText))"])
+        delegate?.created(model: value)
         dismiss(animated: true)
     }
     

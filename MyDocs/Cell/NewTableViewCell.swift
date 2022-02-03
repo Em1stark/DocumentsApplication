@@ -25,7 +25,7 @@ class NewTableViewCell: UITableViewCell {
     }
     
     // Func of configuration cell
-    func set(object: modelTableView){
+    func set(object: RealmDataBase){
         self.myFace.text = object.face
         self.myDefinition.text = object.definition
     }

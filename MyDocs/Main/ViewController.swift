@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import RealmSwift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -15,6 +16,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     let cellSpacingHeight: CGFloat = 5
+    
+    let realm = try! Realm()
+    
+    let realm1 = RealmDataBase()
+    var realmDataBaseArray: Results<RealmDataBase>!
+    
     // Array of objects
     var personOfFamily = [modelTableView(face: "🧔‍♂️", definition: "Dad"),
                           modelTableView(face: "👩‍⚕️", definition: "Mum"),
@@ -23,6 +30,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        realmDataBaseArray = realm.objects(RealmDataBase.self)
         
         // Connect nib for element (cell) of tableView
         firstLabel.tintColor = .black
@@ -77,13 +86,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // TableView Funcs
     // Number of rows in section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return personOfFamily.count
+        return realmDataBaseArray.count
     }
     
     // Change cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewTableViewCell", for: indexPath) as! NewTableViewCell
-        let object = personOfFamily[indexPath.row]
+        let object = realmDataBaseArray[indexPath.row]
         cell.set(object: object)
         cell.backgroundColor = .init(red: 0.983, green: 0.983, blue: 0.983, alpha: 1)
         
@@ -132,8 +141,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 }
 
 extension ViewController: CreationDelegate {
-    func created(model: modelTableView) {
-        personOfFamily.append(model)
+    func created(model: RealmDataBase) {
+        try! realm.write{
+            realm.add(model)
+        }
         tableView.reloadData()
     }
 }
