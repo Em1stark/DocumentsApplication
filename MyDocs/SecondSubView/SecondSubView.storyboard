@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Second Sub View-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="SecondSubView" id="Y6W-OH-hqX" customClass="SecondSubView" customModule="MyDocs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PEC-LX-Po2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Name of category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hy1-tD-grX">
+                                <rect key="frame" x="79" y="118" width="256" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="GgG-tq-yJf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textChanged:" destination="Y6W-OH-hqX" eventType="editingChanged" id="KfJ-qj-zUH"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egS-cU-J8D">
+                                <rect key="frame" x="364" y="60" width="30" height="34"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="JXT-nX-ULL"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQf-Sg-spp">
+                                <rect key="frame" x="183" y="60" width="48" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgB-aF-rLg">
+                                <rect key="frame" x="41" y="187" width="332" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="XbN-Ve-g23"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Add">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                    <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="saveButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="psf-YU-nJ2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Wf8-Zv-wRv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="egS-cU-J8D" firstAttribute="trailing" secondItem="PEC-LX-Po2" secondAttribute="trailingMargin" id="3a5-E5-dbw"/>
+                            <constraint firstItem="EQf-Sg-spp" firstAttribute="top" secondItem="Wf8-Zv-wRv" secondAttribute="top" constant="16" id="5mB-q1-pg5"/>
+                            <constraint firstItem="EQf-Sg-spp" firstAttribute="bottom" secondItem="egS-cU-J8D" secondAttribute="bottom" id="A7g-cE-bZh"/>
+                            <constraint firstItem="EQf-Sg-spp" firstAttribute="centerX" secondItem="hy1-tD-grX" secondAttribute="centerX" id="B7l-X4-R5R"/>
+                            <constraint firstItem="Wf8-Zv-wRv" firstAttribute="trailing" secondItem="hy1-tD-grX" secondAttribute="trailing" constant="79" id="Zdi-Ql-dyg"/>
+                            <constraint firstItem="Wf8-Zv-wRv" firstAttribute="trailing" secondItem="bgB-aF-rLg" secondAttribute="trailing" constant="41" id="ase-m7-Nvs"/>
+                            <constraint firstItem="bgB-aF-rLg" firstAttribute="leading" secondItem="Wf8-Zv-wRv" secondAttribute="leading" constant="41" id="dof-IW-oL2"/>
+                            <constraint firstItem="bgB-aF-rLg" firstAttribute="top" secondItem="hy1-tD-grX" secondAttribute="bottom" constant="25" id="e7w-rF-vKU"/>
+                            <constraint firstItem="bgB-aF-rLg" firstAttribute="leading" secondItem="hy1-tD-grX" secondAttribute="leading" constant="-38" id="ePB-Mm-mfy"/>
+                            <constraint firstItem="hy1-tD-grX" firstAttribute="top" secondItem="egS-cU-J8D" secondAttribute="bottom" constant="24" id="jbJ-v8-Imm"/>
+                            <constraint firstItem="egS-cU-J8D" firstAttribute="top" secondItem="Wf8-Zv-wRv" secondAttribute="top" constant="16" id="uSZ-Rg-yug"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="egS-cU-J8D" id="5NV-gr-Euc"/>
+                        <outlet property="saveButton" destination="bgB-aF-rLg" id="OIc-Jz-H0a"/>
+                        <outlet property="textField" destination="hy1-tD-grX" id="Q5R-QP-OER"/>
+                        <outlet property="textLabel" destination="EQf-Sg-spp" id="cco-4g-vKZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="34.782608695652179" y="63.616071428571423"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
