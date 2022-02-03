@@ -22,6 +22,7 @@
 		C583077B27687BE1003FF19E /* NewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C583077927687BE1003FF19E /* NewTableViewCell.xib */; };
 		C58668A0279E7323009C2EC9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C586689E279E7323009C2EC9 /* CollectionViewCell.swift */; };
 		C58668A1279E7323009C2EC9 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C586689F279E7323009C2EC9 /* CollectionViewCell.xib */; };
+		C594F43127ABF2BE00878885 /* RealmDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594F43027ABF2BE00878885 /* RealmDataBase.swift */; };
 		C5966648276BBA7900A17CA0 /* firstSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5966647276BBA7900A17CA0 /* firstSubView.swift */; };
 		C596664A276BBA9700A17CA0 /* firstSubView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5966649276BBA9700A17CA0 /* firstSubView.storyboard */; };
 		C59DBA3627AB37A00060F576 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C59DBA3527AB37A00060F576 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		C583077927687BE1003FF19E /* NewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewTableViewCell.xib; sourceTree = "<group>"; };
 		C586689E279E7323009C2EC9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C586689F279E7323009C2EC9 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		C594F43027ABF2BE00878885 /* RealmDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataBase.swift; sourceTree = "<group>"; };
 		C5966647276BBA7900A17CA0 /* firstSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstSubView.swift; sourceTree = "<group>"; };
 		C5966649276BBA9700A17CA0 /* firstSubView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = firstSubView.storyboard; sourceTree = "<group>"; };
 		C59DBA3527AB37A00060F576 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		C583075F27687A3D003FF19E /* MyDocs */ = {
 			isa = PBXGroup;
 			children = (
+				C594F42F27ABF28D00878885 /* RealmDataBase */,
 				C52D01C727A88102005B66C8 /* ImagePicker */,
 				C54D9A6C276E1C1B0023036F /* ChangeObject */,
 				C5966646276BBA0500A17CA0 /* FirstSubView */,
@@ -149,6 +152,14 @@
 				C583076B27687A3E003FF19E /* LaunchScreen.storyboard */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		C594F42F27ABF28D00878885 /* RealmDataBase */ = {
+			isa = PBXGroup;
+			children = (
+				C594F43027ABF2BE00878885 /* RealmDataBase.swift */,
+			);
+			path = RealmDataBase;
 			sourceTree = "<group>";
 		};
 		C5966646276BBA0500A17CA0 /* FirstSubView */ = {
@@ -278,6 +289,7 @@
 			files = (
 				C58668A0279E7323009C2EC9 /* CollectionViewCell.swift in Sources */,
 				C583077A27687BE1003FF19E /* NewTableViewCell.swift in Sources */,
+				C594F43127ABF2BE00878885 /* RealmDataBase.swift in Sources */,
 				C5966648276BBA7900A17CA0 /* firstSubView.swift in Sources */,
 				C52D01C927A8812C005B66C8 /* ImagePicker.swift in Sources */,
 				C5A5CF7D27A02C7100EE495E /* SecondSubView.swift in Sources */,
