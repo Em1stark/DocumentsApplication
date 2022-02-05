@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import RealmSwift
 
 protocol DocDelegate: AnyObject {
     func show()
@@ -21,16 +22,20 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var secondLabel: UILabel!
     
-    var photo: UIImage!
     var imagePicker: ImagePicker!
     var docs = [newModelTableView]() //newModelTableView(name: "Test", images: [])
+    let realm = try! Realm()
+    
+    var usersDocumentsArray: Results<UserDocumentsDataBase>!
     
     var idDocs: Int = 0
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        usersDocumentsArray = realm.objects(UserDocumentsDataBase.self)
         
         let nib = UINib(nibName: "CellForDocsTableView", bundle: nil)
         docTableView.register(nib, forCellReuseIdentifier: "CellForDocsTableView")
@@ -39,15 +44,15 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         docTableView.dataSource = self
         
         secondLabel.text = "Documents"
-        secondLabel.tintColor = .black
+        secondLabel.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         view.backgroundColor = .init(red: 0.887, green: 0.954, blue: 1, alpha: 1)
         docTableView.backgroundColor = .init(cgColor: .init(red: 0.945, green: 0.973, blue: 1, alpha: 1))
-        backButton.tintColor = .black
+        backButton.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        backButton.setTitle("Back", for: .normal)
-        addDocButton.tintColor = .black
+        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        addDocButton.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         addDocButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        addDocButton.setTitle("Add", for: .normal)
+        addDocButton.setImage(UIImage(systemName: "plus"), for: .normal)
         
     }
     
@@ -74,12 +79,12 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return docs.count
+        return usersDocumentsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellForDocsTableView", for: indexPath) as! CellForDocsTableView
-        let object = docs[indexPath.row]
+        let object = usersDocumentsArray[indexPath.row]
         cell.set(object: object)
         cell.delegate = self
         
@@ -102,8 +107,11 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
 }
 
 extension ObjectViewController: newCreationDelegate {
-    func created(model: newModelTableView) {
-        docs.append(model)
+    func created(model: UserDocumentsDataBase) {
+        
+        try! realm.write{
+            realm.add(model)
+        }
         docTableView.reloadData()
     }
 }

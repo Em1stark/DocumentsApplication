@@ -66,9 +66,9 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
         self.delegate?.look(image: images[indexPath.item])
     }
     
-    func set(object: newModelTableView){
-        self.nameLabel.text = object.name
-        self.images = object.images
+    func set(object: UserDocumentsDataBase){
+        self.nameLabel.text = object.nameCategoryOfDocument
+        //self.images = object.images
         collectionView.reloadData()
         }
 }

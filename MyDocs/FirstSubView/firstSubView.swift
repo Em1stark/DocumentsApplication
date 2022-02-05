@@ -22,7 +22,7 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIButton!
     
     weak var delegate: CreationDelegate?
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,9 @@ class firstSubView: UIViewController, UITextFieldDelegate {
         iconTextField.textColor = UIColor(red: 0.488, green: 0.488, blue: 0.488, alpha: 1)
         iconTextField.placeholder = "Name"
 
-        cancelButton.tintColor = .red
+        cancelButton.tintColor = .systemGray4
+        cancelButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        
         
         view.backgroundColor = .white
         let spacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
@@ -72,8 +74,10 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     @IBAction func saveButton(_ sender: UIButton) {
         let nameText = nameTextField.text ?? ""
         let iconText = iconTextField.text ?? ""
-        let value = RealmDataBase(value: ["\(String(describing: nameText))", "\(String(describing: iconText))"])
+        let k = 1
+        let value = RealmDataBase(value: [k, "\(nameText)", "\(iconText)"])
         delegate?.created(model: value)
+        
         dismiss(animated: true)
     }
     

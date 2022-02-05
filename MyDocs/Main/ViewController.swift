@@ -9,6 +9,7 @@ import UIKit
 import SwiftUI
 import RealmSwift
 
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var firstLabel: UILabel!
@@ -33,7 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         realmDataBaseArray = realm.objects(RealmDataBase.self)
         
         // Connect nib for element (cell) of tableView
-        firstLabel.tintColor = .black
+        firstLabel.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         firstLabel.text = "Documents"
         view.backgroundColor = .init(red: 0.887, green: 0.954, blue: 1, alpha: 1)
         let nib = UINib(nibName: "NewTableViewCell", bundle: nil)
@@ -43,12 +44,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         
         tableView.backgroundColor = .init(cgColor: .init(red: 0.945, green: 0.973, blue: 1, alpha: 1))
-        editButton.tintColor = .black
+        editButton.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        editButton.setTitle("Edit", for: .normal)
-        addButton.tintColor = .black
+        editButton.setImage(UIImage(systemName: "list.bullet.rectangle.portrait"), for: .normal)
+        addButton.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        addButton.setTitle("Add", for: .normal)
+        //addButton.setTitle("Add", for: .normal)
+        addButton.setImage(UIImage(systemName: "plus"), for: .normal)
     }
     
     // Create edit Button
@@ -56,11 +58,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func editButton(_ sender: UIButton) {
         if tableView.isEditing{
             tableView.setEditing(false, animated: true)
-            sender.setTitle("Edit", for: .normal)
+            editButton.setImage(UIImage(systemName: "list.bullet.rectangle.portrait"), for: .normal)
             addButton.isEnabled = true
         }else{
             tableView.setEditing(true, animated: true)
-            sender.setTitle("Done", for: .normal)
+            editButton.setImage(UIImage(systemName: "list.bullet.rectangle.portrait.fill"), for: .normal)
             addButton.isEnabled = false
             
         }

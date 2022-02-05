@@ -7,9 +7,9 @@
 
 import UIKit
 import SwiftUI
-
+import RealmSwift
 protocol newCreationDelegate: AnyObject {
-    func created(model: newModelTableView)
+    func created(model: UserDocumentsDataBase)
 }
 
 class SecondSubView: UIViewController, UITextFieldDelegate {
@@ -21,8 +21,12 @@ class SecondSubView: UIViewController, UITextFieldDelegate {
     
     weak var delegate: newCreationDelegate?
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cancelButton.tintColor = .systemGray4
+        cancelButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         
         saveButton.tintColor = .black
         saveButton.layer.cornerRadius = 14
@@ -45,7 +49,10 @@ class SecondSubView: UIViewController, UITextFieldDelegate {
     
     @IBAction func saveButton(_ sender: Any) {
         let nameText = textField.text ?? ""
-        let newObject = newModelTableView(name: nameText, images: [])
+        let person = RealmDataBase()
+        //person.userDocuments.append(UserDocumentsDataBase(value: "\(nameText)"))
+        let newObject = UserDocumentsDataBase(value: person.userDocuments.append(UserDocumentsDataBase(value: "\(nameText)")))
+        
         delegate?.created(model: newObject)
         dismiss(animated: true)
     }
