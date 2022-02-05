@@ -21,7 +21,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJl-e5-YK8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJl-e5-YK8">
                                 <rect key="frame" x="344" y="48" width="30" height="36"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title=""/>
@@ -29,8 +29,8 @@
                                     <action selector="addButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PAH-yV-Yb0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9T-OB-9q1">
-                                <rect key="frame" x="16" y="49" width="30" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9T-OB-9q1">
+                                <rect key="frame" x="16" y="49" width="80" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title=""/>
@@ -51,18 +51,18 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="K9T-OB-9q1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="0qm-mD-0FJ"/>
-                            <constraint firstItem="qrh-4E-Q2M" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K9T-OB-9q1" secondAttribute="trailing" id="2q0-Bk-fp6"/>
-                            <constraint firstItem="K9T-OB-9q1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="3h1-9z-HAw"/>
                             <constraint firstItem="BvT-6d-nkF" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="3mj-om-v1f"/>
-                            <constraint firstItem="BvT-6d-nkF" firstAttribute="top" secondItem="K9T-OB-9q1" secondAttribute="bottom" constant="7" id="Ivd-Tq-zmB"/>
                             <constraint firstItem="BvT-6d-nkF" firstAttribute="top" secondItem="qrh-4E-Q2M" secondAttribute="bottom" constant="16.666666666666671" id="Lha-Xf-hMc"/>
                             <constraint firstItem="IJl-e5-YK8" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="OTd-7V-nWi"/>
+                            <constraint firstItem="K9T-OB-9q1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="QHJ-6B-cSr"/>
+                            <constraint firstItem="BvT-6d-nkF" firstAttribute="top" secondItem="K9T-OB-9q1" secondAttribute="bottom" constant="7" id="Te6-U6-wMl"/>
                             <constraint firstItem="IJl-e5-YK8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qrh-4E-Q2M" secondAttribute="trailing" id="UbX-bX-pT9"/>
                             <constraint firstItem="qrh-4E-Q2M" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bSw-AX-5CJ"/>
                             <constraint firstItem="BvT-6d-nkF" firstAttribute="top" secondItem="IJl-e5-YK8" secondAttribute="bottom" constant="8" id="lz7-mF-okh"/>
+                            <constraint firstItem="K9T-OB-9q1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="p12-SC-rDh"/>
                             <constraint firstItem="IJl-e5-YK8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="r14-wq-b4P"/>
                             <constraint firstItem="qrh-4E-Q2M" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="twl-8s-l34"/>
+                            <constraint firstItem="qrh-4E-Q2M" firstAttribute="leading" secondItem="K9T-OB-9q1" secondAttribute="trailing" constant="29" id="vpk-nP-LfC"/>
                             <constraint firstItem="qrh-4E-Q2M" firstAttribute="centerX" secondItem="BvT-6d-nkF" secondAttribute="centerX" id="x3s-ZC-fFZ"/>
                             <constraint firstItem="BvT-6d-nkF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xdT-l8-CEL"/>
                         </constraints>

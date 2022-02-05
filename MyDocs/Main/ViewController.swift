@@ -19,7 +19,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let realm = try! Realm()
     
-    let realm1 = RealmDataBase()
     var realmDataBaseArray: Results<RealmDataBase>!
     
     // Array of objects
@@ -63,17 +62,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableView.setEditing(true, animated: true)
             sender.setTitle("Done", for: .normal)
             addButton.isEnabled = false
-            addButton.setTitleColor(UIColor(red: 0.945, green: 0.973, blue: 1, alpha: 1), for: .disabled)
+            
         }
     }
     
     // create addButton
     @IBAction func addButton(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "firstSubView", bundle: nil)
+        
         guard let sheetPresentationController = storyboard.instantiateViewController(withIdentifier: "firstSubView") as? firstSubView else { return
-            
         }
         sheetPresentationController.delegate = self
+        
         if let sheet = sheetPresentationController.sheetPresentationController {
             sheet.detents = [.medium()]
             sheet.preferredCornerRadius = 32
@@ -109,8 +109,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Realization delete objects from tableView
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            personOfFamily.remove(at: indexPath.row)
+            try! realm.write{
+                realm.delete(realmDataBaseArray[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            tableView.reloadData()
         }
     }
     
