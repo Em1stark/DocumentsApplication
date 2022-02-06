@@ -67,7 +67,7 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
     }
     
     func set(object: UserDocumentsDataBase){
-        self.nameLabel.text = object.nameCategoryOfDocument
+        self.nameLabel.text = object.nameOfCategory
         //self.images = object.images
         collectionView.reloadData()
         }

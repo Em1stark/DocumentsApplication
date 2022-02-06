@@ -51,7 +51,7 @@ class SecondSubView: UIViewController, UITextFieldDelegate {
         let nameText = textField.text ?? ""
         let person = RealmDataBase()
         //person.userDocuments.append(UserDocumentsDataBase(value: "\(nameText)"))
-        let newObject = UserDocumentsDataBase(value: person.userDocuments.append(UserDocumentsDataBase(value: "\(nameText)")))
+        let newObject = UserDocumentsDataBase(value: person.userCategories.append(UserDocumentsDataBase(value: "\(nameText)")))
         
         delegate?.created(model: newObject)
         dismiss(animated: true)

@@ -63,7 +63,6 @@ class firstSubView: UIViewController, UITextFieldDelegate {
         
     }
     
-    var newObject = modelTableView(face: "", definition: "")
     
     // Realization cancelButton
     @IBAction func cancelButton(_ sender: UIButton) {
@@ -74,8 +73,8 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     @IBAction func saveButton(_ sender: UIButton) {
         let nameText = nameTextField.text ?? ""
         let iconText = iconTextField.text ?? ""
-        let k = 1
-        let value = RealmDataBase(value: [k, "\(nameText)", "\(iconText)"])
+        
+        let value = RealmDataBase(value: [ObjectId.generate(), "\(nameText)", "\(iconText)"])
         delegate?.created(model: value)
         
         dismiss(animated: true)

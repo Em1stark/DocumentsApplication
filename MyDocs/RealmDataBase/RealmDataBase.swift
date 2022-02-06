@@ -10,20 +10,19 @@ import RealmSwift
 
 
 class RealmDataBase: Object{
-    @objc dynamic var UserId: Int = 0
-    @objc dynamic var face: String = ""
-    @objc dynamic var definition: String = ""
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var face: String = ""
+    @Persisted var definition: String = ""
     
-    var userDocuments = List<UserDocumentsDataBase>()
+    @Persisted var userCategories = List<UserDocumentsDataBase>()
     
-//        override static func primaryKey() -> String? {
-//                return "nameCategoryOfDocument"
-//            }
+
 
 }
 
 class UserDocumentsDataBase: Object{
-        @objc dynamic var nameCategoryOfDocument = ""
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var nameOfCategory = ""
         
         
 }
