@@ -14,6 +14,8 @@ protocol DocDelegate: AnyObject {
 }
 
 class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    var index = 0
     
     weak var delegate: DocDelegate?
     
@@ -22,21 +24,20 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var secondLabel: UILabel!
     
+    
     var imagePicker: ImagePicker!
     var docs = [newModelTableView]() //newModelTableView(name: "Test", images: [])
-    let realm = try! Realm()
     
-    var usersDocumentsArray: Results<UserDocumentsDataBase>!
-    
+    var usersDocumentsArray: Results<UserDocument>!
+//    var userArray: Results<User>!
     var idDocs: Int = 0
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        usersDocumentsArray = realm.objects(UserDocument.self)
+//        userArray = realm.objects(User.self)
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
-        usersDocumentsArray = realm.objects(UserDocumentsDataBase.self)
-        
+
         let nib = UINib(nibName: "CellForDocsTableView", bundle: nil)
         docTableView.register(nib, forCellReuseIdentifier: "CellForDocsTableView")
         docTableView.allowsSelection = false
@@ -64,10 +65,11 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
             sheet.detents = [.medium()]
             sheet.preferredCornerRadius = 32
             sheet.prefersGrabberVisible = true
-    
+            sheetPresentationController.index = index
         }
 
         self.present(sheetPresentationController, animated: true, completion: nil)
+        
     } 
     
     @IBAction func backButton(_ sender: UIButton) {
@@ -85,6 +87,7 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellForDocsTableView", for: indexPath) as! CellForDocsTableView
         let object = usersDocumentsArray[indexPath.row]
+        
         cell.set(object: object)
         cell.delegate = self
         
@@ -107,11 +110,8 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
 }
 
 extension ObjectViewController: newCreationDelegate {
-    func created(model: UserDocumentsDataBase) {
-        
-        try! realm.write{
-            realm.add(model)
-        }
+    func created(model: UserDocument) {
+        //print(index)
         docTableView.reloadData()
     }
 }
@@ -147,7 +147,7 @@ extension ObjectViewController: ImagePickerDelegate {
         let newImages = oldCategory.images + [image!]
         let newCategory = newModelTableView.init(name: oldCategory.name, images: newImages)
         docs[idDocs] = newCategory
-            docTableView.reloadData()
+        docTableView.reloadData()
             
         }else{
             docTableView.reloadData()

@@ -31,8 +31,9 @@
 		C5A5CF7927A0242300EE495E /* newModelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A5CF7827A0242300EE495E /* newModelTableView.swift */; };
 		C5A5CF7D27A02C7100EE495E /* SecondSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A5CF7C27A02C7100EE495E /* SecondSubView.swift */; };
 		C5A5CF7F27A02CBC00EE495E /* SecondSubView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A5CF7E27A02CBC00EE495E /* SecondSubView.storyboard */; };
-		C5D13385276C580D00694EBE /* ObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D13384276C580D00694EBE /* ObjectViewController.swift */; };
 		C5D13387276C581E00694EBE /* ObjectViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5D13386276C581E00694EBE /* ObjectViewController.storyboard */; };
+		C5F6AA4127B175AB00AA8D1C /* ObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D13384276C580D00694EBE /* ObjectViewController.swift */; };
+		C5F6AA4327B196CA00AA8D1C /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6AA4227B196CA00AA8D1C /* DBManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		C5A5CF7E27A02CBC00EE495E /* SecondSubView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecondSubView.storyboard; sourceTree = "<group>"; };
 		C5D13384276C580D00694EBE /* ObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectViewController.swift; sourceTree = "<group>"; };
 		C5D13386276C581E00694EBE /* ObjectViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ObjectViewController.storyboard; sourceTree = "<group>"; };
+		C5F6AA4227B196CA00AA8D1C /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 		C594F42F27ABF28D00878885 /* RealmDataBase */ = {
 			isa = PBXGroup;
 			children = (
+				C5F6AA4227B196CA00AA8D1C /* DBManager.swift */,
 				C594F43027ABF2BE00878885 /* RealmDataBase.swift */,
 			);
 			path = RealmDataBase;
@@ -303,11 +306,12 @@
 				C594F43127ABF2BE00878885 /* RealmDataBase.swift in Sources */,
 				C5966648276BBA7900A17CA0 /* firstSubView.swift in Sources */,
 				C52D01C927A8812C005B66C8 /* ImagePicker.swift in Sources */,
+				C5F6AA4127B175AB00AA8D1C /* ObjectViewController.swift in Sources */,
 				C5A5CF7D27A02C7100EE495E /* SecondSubView.swift in Sources */,
 				C583076527687A3D003FF19E /* ViewController.swift in Sources */,
 				C583076127687A3D003FF19E /* AppDelegate.swift in Sources */,
 				C583076327687A3D003FF19E /* SceneDelegate.swift in Sources */,
-				C5D13385276C580D00694EBE /* ObjectViewController.swift in Sources */,
+				C5F6AA4327B196CA00AA8D1C /* DBManager.swift in Sources */,
 				C5A5CF7927A0242300EE495E /* newModelTableView.swift in Sources */,
 				C54D9A6E276E1C530023036F /* FullPictureViewController.swift in Sources */,
 				C583077727687B8D003FF19E /* ModelTableView.swift in Sources */,

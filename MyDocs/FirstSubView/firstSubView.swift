@@ -10,7 +10,7 @@ import SwiftUI
 import RealmSwift
 
 protocol CreationDelegate: AnyObject {
-    func created(model: RealmDataBase)
+    func created(model: User)
 }
 
 class firstSubView: UIViewController, UITextFieldDelegate {
@@ -23,6 +23,15 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     
     weak var delegate: CreationDelegate?
 
+    let dbManager: DBManager = DBManagerImpl()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let models = dbManager.obtainUsers()
+        
+        print("\(models)")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,9 +82,12 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     @IBAction func saveButton(_ sender: UIButton) {
         let nameText = nameTextField.text ?? ""
         let iconText = iconTextField.text ?? ""
+        var userID = realm.objects(User.self).endIndex
+        let user = User(_id: userID , face: nameText, definition: iconText)
+        userID += 1
+        dbManager.saveUser(user: user)
+        delegate?.created(model: user)
         
-        let value = RealmDataBase(value: [ObjectId.generate(), "\(nameText)", "\(iconText)"])
-        delegate?.created(model: value)
         
         dismiss(animated: true)
     }
@@ -93,4 +105,5 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     }
     
 }
+
 

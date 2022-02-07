@@ -9,19 +9,29 @@ import UIKit
 import SwiftUI
 import RealmSwift
 protocol newCreationDelegate: AnyObject {
-    func created(model: UserDocumentsDataBase)
+    func created(model: UserDocument)
 }
 
-class SecondSubView: UIViewController, UITextFieldDelegate {
-    
+class SecondSubView: UIViewController, UITextFieldDelegate{
+       
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var cancelButton: UIButton!
     
     weak var delegate: newCreationDelegate?
+    fileprivate lazy var mainRealm2 = try! Realm(configuration: .defaultConfiguration)
+    let dbmanager: DBManager = DBManagerImpl()
     
-
+    var index = 0
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let models = dbmanager.obtainCategories()
+        return print("\(models)")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,15 +55,20 @@ class SecondSubView: UIViewController, UITextFieldDelegate {
         textLabel.font = .boldSystemFont(ofSize: 24)
         updateSaveButtonState()
     }
-    var newObject = newModelTableView(name: "", images: [])
     
     @IBAction func saveButton(_ sender: Any) {
         let nameText = textField.text ?? ""
-        let person = RealmDataBase()
-        //person.userDocuments.append(UserDocumentsDataBase(value: "\(nameText)"))
-        let newObject = UserDocumentsDataBase(value: person.userCategories.append(UserDocumentsDataBase(value: "\(nameText)")))
+        let category = UserDocument(value: [ObjectId.generate(), nameText])
         
-        delegate?.created(model: newObject)
+            try! mainRealm2.write{
+                for element in mainRealm2.objects(User.self).elements where element._id == index {
+                    element.userCategories.append(category)
+                }
+                
+            }
+        delegate?.created(model: category)
+        //mainRealm2.create(User.self)
+       //dbmanager.saveCategory(user: category)
         dismiss(animated: true)
     }
     

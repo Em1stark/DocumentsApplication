@@ -9,7 +9,9 @@ import UIKit
 import SwiftUI
 import RealmSwift
 
-
+protocol number: AnyObject{
+    func check(number: Int)
+}
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var firstLabel: UILabel!
@@ -17,10 +19,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     let cellSpacingHeight: CGFloat = 5
+    var count = 0
     
-    let realm = try! Realm()
-    
-    var realmDataBaseArray: Results<RealmDataBase>!
+    var realmDataBaseArray: Results<User>!
     
     // Array of objects
     var personOfFamily = [modelTableView(face: "🧔‍♂️", definition: "Dad"),
@@ -31,7 +32,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        realmDataBaseArray = realm.objects(RealmDataBase.self)
+        realmDataBaseArray = realm.objects(User.self)
         
         // Connect nib for element (cell) of tableView
         firstLabel.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
@@ -136,8 +137,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      
         tableView.deselectRow(at: indexPath, animated: true)
-        let storyboard = UIStoryboard(name: "ObjectViewController", bundle: nil)
+
+                let storyboard = UIStoryboard(name: "ObjectViewController", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "ObjectViewController") as? ObjectViewController else { return }
+        vc.index = indexPath.row
         
         //vc.modalTransitionStyle = .flipHorizontal // это значение можно менять для разных видов анимации появления
         vc.modalPresentationStyle = .fullScreen // это та самая волшебная строка, убрав или закомментировав ее, вы получите появление смахиваемого контроллера
@@ -146,10 +149,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 }
 
 extension ViewController: CreationDelegate {
-    func created(model: RealmDataBase) {
-        try! realm.write{
-            realm.add(model)
-        }
+    func created(model: User) {
         tableView.reloadData()
     }
 }
