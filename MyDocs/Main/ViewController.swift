@@ -97,6 +97,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewTableViewCell", for: indexPath) as! NewTableViewCell
         let object = realmDataBaseArray[indexPath.row]
+        //object._id
         cell.set(object: object)
         cell.backgroundColor = .init(red: 0.983, green: 0.983, blue: 0.983, alpha: 1)
         
@@ -112,7 +113,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Realization delete objects from tableView
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            dbManager.deleteUser(realmDataBaseArray: realmDataBaseArray, tableView: tableView, indexPath: indexPath)
+//            dbManager.deleteUser(realmDataBaseArray: realmDataBaseArray, tableView: tableView, indexPath: indexPath)
+            let userElement = realmDataBaseArray[indexPath.row]
+            dbManager.deleteUser(realmDataBaseArray: realmDataBaseArray, index: userElement.id) {
+                [weak self] in // Capture list
+                self?.tableView.deleteRows(at: [indexPath], with: .fade)
+                self?.tableView.reloadData()
+            }
         }
     }
     
@@ -136,7 +143,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
                 let storyboard = UIStoryboard(name: "ObjectViewController", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "ObjectViewController") as? ObjectViewController else { return }
-        vc.index = indexPath.row
+        let object = realmDataBaseArray[indexPath.row]
+        
+        vc.a = object.id
         
         //vc.modalTransitionStyle = .flipHorizontal // это значение можно менять для разных видов анимации появления
         vc.modalPresentationStyle = .fullScreen // это та самая волшебная строка, убрав или закомментировав ее, вы получите появление смахиваемого контроллера

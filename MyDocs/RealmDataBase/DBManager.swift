@@ -13,11 +13,11 @@ protocol DBManager {
     
     func saveUser(face: String, definition: String)
     
-    func saveCategory(nameText: String, index: Int)
+    func saveCategory(nameText: String, index: ObjectId)
     
-    func deleteUser(realmDataBaseArray: Results<User>, tableView: UITableView, indexPath: IndexPath)
+    func deleteUser(realmDataBaseArray: Results<User>, index: ObjectId, completion: @escaping() -> Void ) // избегающее замыкание
     
-    func deleteCategory(userDocumentsArray: Results<UserDocument>, tableView: UITableView, indexPath: IndexPath)
+    func deleteCategory(userDocumentsArray: Results<UserDocument>, index: ObjectId,  completion: @escaping() -> Void )
     
     func obtainUsers() -> [User]
     
@@ -30,51 +30,48 @@ class DBManagerImpl: DBManager{
     
     func saveUser(face: String, definition: String){
         try! mainRealm.write{
-            let nameText = face
-            let iconText = definition
+//            let nameText = face
+//            let iconText = definition
             var userID = mainRealm.objects(User.self).endIndex
-            let user = User(_id: userID, face: nameText, definition: iconText, userCategories: [])
+            let user = User(face: face, definition: definition, userCategories: [])
             userID += 1
             mainRealm.add(user)
         }
     }
     
-    func saveCategory(nameText: String, index: Int){
-        let nameText = nameText
-        let index = index
+    func saveCategory(nameText: String, index: ObjectId){
+//        let nameText = nameText
+//        let index = index
         try! mainRealm.write{
-            for element in mainRealm.objects(User.self).elements where element._id == index {
+            for element in mainRealm.objects(User.self).elements where element.id == index {
                 var idParent = element.userCategories.endIndex
-                let category = UserDocument(_id: ObjectId.generate(), nameOfCategory: nameText, idParent: index)
+                let category = UserDocument(nameOfCategory: nameText, idParent: index)
                 element.userCategories.append(category)
                 idParent += 1
             }
         }
     }
     
-    func deleteUser(realmDataBaseArray: Results<User>, tableView: UITableView, indexPath: IndexPath){
-        let realmDataBaseArray = realmDataBaseArray
-        let tableView = tableView
-        let indexPath = indexPath
+    func deleteUser(realmDataBaseArray: Results<User>, index: ObjectId, completion: @escaping() -> Void){
+        guard let userElement = realmDataBaseArray.first(where: {$0.id == index}) else {return}
+//        let tableView = tableView
+//        let indexPath = indexPath
         let categories = mainRealm.objects(UserDocument.self)
             try! mainRealm.write{
-                mainRealm.delete(realmDataBaseArray[indexPath.row])
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                mainRealm.delete(categories.where({$0.idParent == indexPath.row}))
-                mainRealm.add(realmDataBaseArray, update: .all)
-                
-                tableView.reloadData()
+                mainRealm.delete(userElement)
+                //tableView.deleteRows(at: [indexPath], with: .fade)
+                mainRealm.delete(categories.where({$0.idParent == index}))
+                //mainRealm.add(realmDataBaseArray, update: .all)
+                completion()
+                //tableView.reloadData()
             }
     }
     
-    func deleteCategory(userDocumentsArray: Results<UserDocument>, tableView: UITableView, indexPath: IndexPath){
-        let userDocumentsArray = userDocumentsArray
-        let tableView = tableView
-        let indexPath = indexPath
+    func deleteCategory(userDocumentsArray: Results<UserDocument>, index: ObjectId, completion: @escaping() -> Void ){
+        guard let categoryElement = userDocumentsArray.first(where: {$0.id == index}) else {return}
             try! mainRealm.write{
-                mainRealm.delete(userDocumentsArray[indexPath.row])
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                tableView.reloadData()
+                mainRealm.delete(categoryElement)
+                completion()
             }
     }
     

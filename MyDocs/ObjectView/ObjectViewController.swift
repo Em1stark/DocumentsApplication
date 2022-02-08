@@ -30,12 +30,12 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let dbManager: DBManager = DBManagerImpl()
     var usersDocumentsArray: Results<UserDocument>!
     var idDocs: Int = 0
-    var index = 0
+    var a: ObjectId!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        usersDocumentsArray = mainRealm2.objects(UserDocument.self).where({$0.idParent == index})
+        usersDocumentsArray = mainRealm2.objects(UserDocument.self).where({$0.idParent == a})
         
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
 
@@ -66,7 +66,7 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
             sheet.detents = [.medium()]
             sheet.preferredCornerRadius = 32
             sheet.prefersGrabberVisible = true
-            sheetPresentationController.index = index
+            sheetPresentationController.a = a
         }
         self.present(sheetPresentationController, animated: true, completion: nil)
     } 
@@ -99,7 +99,12 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Realization delete objects from tableView
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            dbManager.deleteCategory(userDocumentsArray: usersDocumentsArray, tableView: tableView, indexPath: indexPath)
+            let categoryElement = usersDocumentsArray[indexPath.row]
+            dbManager.deleteCategory(userDocumentsArray: usersDocumentsArray, index: categoryElement.id) {
+            [weak self] in // Capture list
+            self?.docTableView.deleteRows(at: [indexPath], with: .fade)
+            self?.docTableView.reloadData()
+            }
         }
     }
 }
