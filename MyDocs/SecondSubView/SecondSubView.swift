@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 import RealmSwift
 protocol newCreationDelegate: AnyObject {
-    func created(model: UserDocument)
+    func created(model: String)
 }
 
 class SecondSubView: UIViewController, UITextFieldDelegate{
@@ -20,16 +20,14 @@ class SecondSubView: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var cancelButton: UIButton!
     
     weak var delegate: newCreationDelegate?
-    fileprivate lazy var mainRealm2 = try! Realm(configuration: .defaultConfiguration)
     let dbmanager: DBManager = DBManagerImpl()
-    
     var index = 0
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let models = dbmanager.obtainCategories()
-        return print("\(models)")
+        //let models = dbmanager.obtainCategories()
+        //return print("\(models)")
     }
     
     override func viewDidLoad() {
@@ -58,17 +56,8 @@ class SecondSubView: UIViewController, UITextFieldDelegate{
     
     @IBAction func saveButton(_ sender: Any) {
         let nameText = textField.text ?? ""
-        let category = UserDocument(value: [ObjectId.generate(), nameText])
-        
-            try! mainRealm2.write{
-                for element in mainRealm2.objects(User.self).elements where element._id == index {
-                    element.userCategories.append(category)
-                }
-                
-            }
-        delegate?.created(model: category)
-        //mainRealm2.create(User.self)
-       //dbmanager.saveCategory(user: category)
+        dbmanager.saveCategory(nameText: nameText, index: index)
+        delegate?.created(model: "Передача пустого делегата в ObjectViewController")
         dismiss(animated: true)
     }
     

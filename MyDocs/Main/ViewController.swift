@@ -20,7 +20,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var addButton: UIButton!
     let cellSpacingHeight: CGFloat = 5
     var count = 0
-    
+    let dbManager: DBManager = DBManagerImpl()
+    let mainRealm2 = try! Realm()
     var realmDataBaseArray: Results<User>!
     
     // Array of objects
@@ -32,7 +33,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        realmDataBaseArray = realm.objects(User.self)
+        realmDataBaseArray = mainRealm2.objects(User.self)
         
         // Connect nib for element (cell) of tableView
         firstLabel.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
@@ -105,18 +106,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Realization delete button objects from personOfFamily
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        
         return .delete
     }
     
     // Realization delete objects from tableView
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            try! realm.write{
-                realm.delete(realmDataBaseArray[indexPath.row])
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            }
-            tableView.reloadData()
+            dbManager.deleteUser(realmDataBaseArray: realmDataBaseArray, tableView: tableView, indexPath: indexPath)
         }
     }
     
@@ -149,7 +145,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 }
 
 extension ViewController: CreationDelegate {
-    func created(model: User) {
+    func created(model: String) {
         tableView.reloadData()
     }
 }

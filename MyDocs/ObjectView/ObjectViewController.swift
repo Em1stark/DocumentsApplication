@@ -15,8 +15,6 @@ protocol DocDelegate: AnyObject {
 
 class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var index = 0
-    
     weak var delegate: DocDelegate?
     
     @IBOutlet weak var addDocButton: UIButton!
@@ -24,18 +22,21 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var secondLabel: UILabel!
     
+    let mainRealm2 = try! Realm()
     
     var imagePicker: ImagePicker!
     var docs = [newModelTableView]() //newModelTableView(name: "Test", images: [])
     
+    let dbManager: DBManager = DBManagerImpl()
     var usersDocumentsArray: Results<UserDocument>!
-//    var userArray: Results<User>!
     var idDocs: Int = 0
+    var index = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        usersDocumentsArray = realm.objects(UserDocument.self)
-//        userArray = realm.objects(User.self)
+        
+        usersDocumentsArray = mainRealm2.objects(UserDocument.self).where({$0.idParent == index})
+        
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
 
         let nib = UINib(nibName: "CellForDocsTableView", bundle: nil)
@@ -67,9 +68,7 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
             sheet.prefersGrabberVisible = true
             sheetPresentationController.index = index
         }
-
         self.present(sheetPresentationController, animated: true, completion: nil)
-        
     } 
     
     @IBAction func backButton(_ sender: UIButton) {
@@ -87,7 +86,6 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellForDocsTableView", for: indexPath) as! CellForDocsTableView
         let object = usersDocumentsArray[indexPath.row]
-        
         cell.set(object: object)
         cell.delegate = self
         
@@ -95,23 +93,20 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        
         return .delete
     }
     
     // Realization delete objects from tableView
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            docs.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            dbManager.deleteCategory(userDocumentsArray: usersDocumentsArray, tableView: tableView, indexPath: indexPath)
         }
     }
-    
 }
 
 extension ObjectViewController: newCreationDelegate {
-    func created(model: UserDocument) {
-        //print(index)
+    func created(model: String) {
+
         docTableView.reloadData()
     }
 }
@@ -132,6 +127,7 @@ extension ObjectViewController: MyTableViewCellDelegate{
         let storyboard = UIStoryboard(name: "FullPictureViewController", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "FullPictureViewController") as? FullPictureViewController else { return }
         vc.modalPresentationStyle = .fullScreen
+        
         vc.view.backgroundColor = .init(red: 0.887, green: 0.954, blue: 1, alpha: 1)
         vc.fullImage.backgroundColor = .init(cgColor: .init(red: 0.945, green: 0.973, blue: 1, alpha: 1))
         vc.fullImage.image = image
@@ -152,7 +148,5 @@ extension ObjectViewController: ImagePickerDelegate {
         }else{
             docTableView.reloadData()
         }
-        
     }
-    
 }
