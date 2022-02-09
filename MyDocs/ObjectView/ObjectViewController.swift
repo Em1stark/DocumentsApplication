@@ -86,10 +86,10 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellForDocsTableView", for: indexPath) as! CellForDocsTableView
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellForDocsTableView", for: indexPath) as? CellForDocsTableView else { return  UITableViewCell()}
         let object = usersDocumentsArray[indexPath.row]
         cell.idCategoryAfterTapButton = object.id
-        cell.set(object: object, index: object.id)
+        cell.set(arrayOfImages: usersDocumentsArray[indexPath.row].arrayOfImages.reversed().reversed(), index: object.id , nameLabel: usersDocumentsArray[indexPath.row].nameOfCategory)
         cell.delegate = self
         
         return cell
@@ -125,6 +125,7 @@ extension ObjectViewController: MyTableViewCellDelegate{
         let firstIndexWhereName = usersDocumentsArray.firstIndex(where: {$0.nameOfCategory == name})!
         idCategory = usersDocumentsArray[firstIndexWhereName].id
         self.imagePicker.present(from: self.view)
+        
     }
     
     func look(image: UIImage) {
@@ -149,20 +150,13 @@ extension ObjectViewController: ImagePickerDelegate {
             
             try! mainRealm2.write{
                 
-                for i in mainRealm2.objects(UserDocument.self).where({$0.id == idCategory}){
+                for userDocument in mainRealm2.objects(UserDocument.self).where({$0.id == idCategory}){
                     let addedElementToCategoryImage = CategoryImage(image: imageConvertedToData)
-                    i.arrayOfImages.append(addedElementToCategoryImage)
-                    mainRealm2.add(i)
+                    userDocument.arrayOfImages.append(addedElementToCategoryImage)
+                    mainRealm2.add(userDocument)
                     docTableView.reloadData()
                 }
- 
             }
-//        let oldCategory = docs[idDocs]
-//        let newImages = oldCategory.images + [image!]
-//        let newCategory = newModelTableView.init(name: oldCategory.name, images: newImages)
-//        docs[idDocs] = newCategory
-        
-            
         }else{
             docTableView.reloadData()
         }
