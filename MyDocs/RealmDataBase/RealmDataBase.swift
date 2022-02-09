@@ -34,10 +34,11 @@ class UserDocument: Object{
     @Persisted var arrayOfImages = List<CategoryImage>()
   //  var _owner = LinkingObjects(fromType: User.self, property: "userCategories")
     
-    convenience init(nameOfCategory: String, idParent: ObjectId) {
+    convenience init(nameOfCategory: String, idParent: ObjectId, arrayOfImages: [CategoryImage]) {
         self.init()
         self.nameOfCategory = nameOfCategory
         self.idParent = idParent
+        self.arrayOfImages.append(objectsIn: arrayOfImages)
         }
     
     override var description: String {

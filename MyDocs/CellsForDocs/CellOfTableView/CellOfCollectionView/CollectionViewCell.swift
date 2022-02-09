@@ -22,7 +22,6 @@ class CollectionViewCell: UICollectionViewCell{
     }
 
     func setupCell(image: UIImage){
-        
         self.docImage.image = image
     }
 }

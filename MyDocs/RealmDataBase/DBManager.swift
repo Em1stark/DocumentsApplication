@@ -45,7 +45,7 @@ class DBManagerImpl: DBManager{
         try! mainRealm.write{
             for element in mainRealm.objects(User.self).elements where element.id == index {
                 var idParent = element.userCategories.endIndex
-                let category = UserDocument(nameOfCategory: nameText, idParent: index)
+                let category = UserDocument(nameOfCategory: nameText, idParent: index, arrayOfImages: [])
                 element.userCategories.append(category)
                 idParent += 1
             }

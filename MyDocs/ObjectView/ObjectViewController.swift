@@ -30,12 +30,12 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let dbManager: DBManager = DBManagerImpl()
     var usersDocumentsArray: Results<UserDocument>!
     var idDocs: Int = 0
-    var a: ObjectId!
+    var indexCellOfFirstTableView: ObjectId!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        usersDocumentsArray = mainRealm2.objects(UserDocument.self).where({$0.idParent == a})
+        usersDocumentsArray = mainRealm2.objects(UserDocument.self).where({$0.idParent == indexCellOfFirstTableView})
         
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
 
@@ -66,7 +66,7 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
             sheet.detents = [.medium()]
             sheet.preferredCornerRadius = 32
             sheet.prefersGrabberVisible = true
-            sheetPresentationController.a = a
+            sheetPresentationController.indexCellOfFirstTableView = indexCellOfFirstTableView
         }
         self.present(sheetPresentationController, animated: true, completion: nil)
     } 
@@ -86,9 +86,8 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellForDocsTableView", for: indexPath) as! CellForDocsTableView
         let object = usersDocumentsArray[indexPath.row]
-        cell.set(object: object)
+        cell.set(object: object, index: object.id)
         cell.delegate = self
-        
         return cell
     }
     
@@ -123,6 +122,8 @@ extension ObjectViewController: MyTableViewCellDelegate{
 //                idDocs = i
 //
 //        }
+        
+        
         idDocs = docs.firstIndex(where: { $0.name == name })!
         self.imagePicker.present(from: self.view)
     }

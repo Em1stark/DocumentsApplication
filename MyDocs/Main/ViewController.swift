@@ -145,7 +145,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let vc = storyboard.instantiateViewController(withIdentifier: "ObjectViewController") as? ObjectViewController else { return }
         let object = realmDataBaseArray[indexPath.row]
         
-        vc.a = object.id
+        vc.indexCellOfFirstTableView = object.id
         
         //vc.modalTransitionStyle = .flipHorizontal // это значение можно менять для разных видов анимации появления
         vc.modalPresentationStyle = .fullScreen // это та самая волшебная строка, убрав или закомментировав ее, вы получите появление смахиваемого контроллера

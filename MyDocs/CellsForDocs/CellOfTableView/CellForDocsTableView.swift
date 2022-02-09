@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol MyTableViewCellDelegate: AnyObject{
     func look(image: UIImage)
@@ -20,11 +21,13 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    let mainRealm2 = try! Realm()
+    var arrayOfOmages: Results<CategoryImage>!
     var images: [UIImage] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        arrayOfOmages = mainRealm2.objects(CategoryImage.self)
         contentView.backgroundColor = .init(cgColor: .init(red: 0.945, green: 0.973, blue: 1, alpha: 1))
         collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "collectionViewID")
         collectionView.dataSource = self
@@ -36,10 +39,14 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
         delegate?.addButtonTapped(name: nameLabel.text!)
+        try! mainRealm2.write{
+            
+            mainRealm2.add(arrayOfOmages)
+        }
         }
     
     override func prepareForReuse() {
-        self.images = []
+       // self.images = []
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,13 +54,15 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return arrayOfOmages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewID", for: indexPath) as! CollectionViewCell
-        let image = images[indexPath.item]
-        cell.setupCell(image: image)
+        let data = arrayOfOmages[indexPath.item].image
+        let dataConvertedToImage : UIImage = UIImage(data: data!)!
+
+        cell.setupCell(image: dataConvertedToImage)
             
         return cell
     }
@@ -66,10 +75,11 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
         self.delegate?.look(image: images[indexPath.item])
     }
     
-    func set(object: UserDocument){
+    func set(object: UserDocument, index: ObjectId){
         self.nameLabel.text = object.nameOfCategory
-        //self.images = object.arrayOfImages
+        self.arrayOfOmages = object.arrayOfImages.where({$0.idParent == index})
         collectionView.reloadData()
         }
 }
+
 

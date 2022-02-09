@@ -21,7 +21,7 @@ class SecondSubView: UIViewController, UITextFieldDelegate{
     
     weak var delegate: newCreationDelegate?
     let dbmanager: DBManager = DBManagerImpl()
-    var a: ObjectId!
+    var indexCellOfFirstTableView: ObjectId!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -56,7 +56,7 @@ class SecondSubView: UIViewController, UITextFieldDelegate{
     
     @IBAction func saveButton(_ sender: Any) {
         let nameText = textField.text ?? ""
-        dbmanager.saveCategory(nameText: nameText, index: a)
+        dbmanager.saveCategory(nameText: nameText, index: indexCellOfFirstTableView)
         delegate?.created(model: "Передача пустого делегата в ObjectViewController")
         dismiss(animated: true)
     }
