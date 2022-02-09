@@ -29,14 +29,16 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     let dbManager: DBManager = DBManagerImpl()
     var usersDocumentsArray: Results<UserDocument>!
+    var imagesArray: Results<CategoryImage>!
     var idDocs: Int = 0
+    var idCategory: ObjectId!
     var indexCellOfFirstTableView: ObjectId!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         usersDocumentsArray = mainRealm2.objects(UserDocument.self).where({$0.idParent == indexCellOfFirstTableView})
-        
+        imagesArray = mainRealm2.objects(CategoryImage.self)
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
 
         let nib = UINib(nibName: "CellForDocsTableView", bundle: nil)
@@ -86,8 +88,10 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellForDocsTableView", for: indexPath) as! CellForDocsTableView
         let object = usersDocumentsArray[indexPath.row]
+        cell.idCategoryAfterTapButton = object.id
         cell.set(object: object, index: object.id)
         cell.delegate = self
+        
         return cell
     }
     
@@ -118,13 +122,8 @@ extension ObjectViewController: newCreationDelegate {
 extension ObjectViewController: MyTableViewCellDelegate{
     func addButtonTapped(name: String) {
        
-//        for i in 0...docs.count - 1 where docs[i].name == name{
-//                idDocs = i
-//
-//        }
-        
-        
-        idDocs = docs.firstIndex(where: { $0.name == name })!
+        let firstIndexWhereName = usersDocumentsArray.firstIndex(where: {$0.nameOfCategory == name})!
+        idCategory = usersDocumentsArray[firstIndexWhereName].id
         self.imagePicker.present(from: self.view)
     }
     
@@ -145,11 +144,24 @@ extension ObjectViewController: MyTableViewCellDelegate{
 extension ObjectViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         if image != nil{
-        let oldCategory = docs[idDocs]
-        let newImages = oldCategory.images + [image!]
-        let newCategory = newModelTableView.init(name: oldCategory.name, images: newImages)
-        docs[idDocs] = newCategory
-        docTableView.reloadData()
+            
+            let imageConvertedToData = image!.pngData()
+            
+            try! mainRealm2.write{
+                
+                for i in mainRealm2.objects(UserDocument.self).where({$0.id == idCategory}){
+                    let addedElementToCategoryImage = CategoryImage(image: imageConvertedToData)
+                    i.arrayOfImages.append(addedElementToCategoryImage)
+                    mainRealm2.add(i)
+                    docTableView.reloadData()
+                }
+ 
+            }
+//        let oldCategory = docs[idDocs]
+//        let newImages = oldCategory.images + [image!]
+//        let newCategory = newModelTableView.init(name: oldCategory.name, images: newImages)
+//        docs[idDocs] = newCategory
+        
             
         }else{
             docTableView.reloadData()

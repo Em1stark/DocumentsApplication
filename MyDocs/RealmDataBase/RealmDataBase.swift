@@ -52,4 +52,9 @@ class CategoryImage: Object{
     @Persisted var image: Data?
     @Persisted var idParent: ObjectId
     
+    convenience init(image: Data?) {
+        self.init()
+        self.image = image
+    }
+    
 }

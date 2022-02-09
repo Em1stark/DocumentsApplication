@@ -40,8 +40,6 @@ class DBManagerImpl: DBManager{
     }
     
     func saveCategory(nameText: String, index: ObjectId){
-//        let nameText = nameText
-//        let index = index
         try! mainRealm.write{
             for element in mainRealm.objects(User.self).elements where element.id == index {
                 var idParent = element.userCategories.endIndex
@@ -54,16 +52,13 @@ class DBManagerImpl: DBManager{
     
     func deleteUser(realmDataBaseArray: Results<User>, index: ObjectId, completion: @escaping() -> Void){
         guard let userElement = realmDataBaseArray.first(where: {$0.id == index}) else {return}
-//        let tableView = tableView
-//        let indexPath = indexPath
+
         let categories = mainRealm.objects(UserDocument.self)
             try! mainRealm.write{
                 mainRealm.delete(userElement)
-                //tableView.deleteRows(at: [indexPath], with: .fade)
                 mainRealm.delete(categories.where({$0.idParent == index}))
-                //mainRealm.add(realmDataBaseArray, update: .all)
                 completion()
-                //tableView.reloadData()
+
             }
     }
     
