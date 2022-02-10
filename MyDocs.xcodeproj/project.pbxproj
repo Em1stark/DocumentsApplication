@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C51B088E27AC67B600279990 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C51B088D27AC67B600279990 /* Realm */; };
+		C51B089027AC67B600279990 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C51B088F27AC67B600279990 /* RealmSwift */; };
 		C52D01C927A8812C005B66C8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D01C827A8812C005B66C8 /* ImagePicker.swift */; };
 		C54D9A6E276E1C530023036F /* FullPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54D9A6D276E1C530023036F /* FullPictureViewController.swift */; };
 		C54D9A70276E1DA50023036F /* FullPictureViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C54D9A6F276E1DA50023036F /* FullPictureViewController.storyboard */; };
@@ -17,7 +19,6 @@
 		C583076527687A3D003FF19E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C583076427687A3D003FF19E /* ViewController.swift */; };
 		C583076827687A3D003FF19E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C583076627687A3D003FF19E /* Main.storyboard */; };
 		C583076D27687A3E003FF19E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C583076B27687A3E003FF19E /* LaunchScreen.storyboard */; };
-		C583077727687B8D003FF19E /* ModelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C583077627687B8D003FF19E /* ModelTableView.swift */; };
 		C583077A27687BE1003FF19E /* NewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C583077827687BE1003FF19E /* NewTableViewCell.swift */; };
 		C583077B27687BE1003FF19E /* NewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C583077927687BE1003FF19E /* NewTableViewCell.xib */; };
 		C58668A0279E7323009C2EC9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C586689E279E7323009C2EC9 /* CollectionViewCell.swift */; };
@@ -26,11 +27,11 @@
 		C5966648276BBA7900A17CA0 /* firstSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5966647276BBA7900A17CA0 /* firstSubView.swift */; };
 		C596664A276BBA9700A17CA0 /* firstSubView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5966649276BBA9700A17CA0 /* firstSubView.storyboard */; };
 		C59DBA3627AB37A00060F576 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C59DBA3527AB37A00060F576 /* Assets.xcassets */; };
-		C5A5CF7927A0242300EE495E /* newModelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A5CF7827A0242300EE495E /* newModelTableView.swift */; };
 		C5A5CF7D27A02C7100EE495E /* SecondSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A5CF7C27A02C7100EE495E /* SecondSubView.swift */; };
 		C5A5CF7F27A02CBC00EE495E /* SecondSubView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A5CF7E27A02CBC00EE495E /* SecondSubView.storyboard */; };
-		C5D13385276C580D00694EBE /* ObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D13384276C580D00694EBE /* ObjectViewController.swift */; };
 		C5D13387276C581E00694EBE /* ObjectViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5D13386276C581E00694EBE /* ObjectViewController.storyboard */; };
+		C5F6AA4127B175AB00AA8D1C /* ObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D13384276C580D00694EBE /* ObjectViewController.swift */; };
+		C5F6AA4327B196CA00AA8D1C /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6AA4227B196CA00AA8D1C /* DBManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +47,6 @@
 		C583076727687A3D003FF19E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C583076C27687A3E003FF19E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C583076E27687A3E003FF19E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C583077627687B8D003FF19E /* ModelTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTableView.swift; sourceTree = "<group>"; };
 		C583077827687BE1003FF19E /* NewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTableViewCell.swift; sourceTree = "<group>"; };
 		C583077927687BE1003FF19E /* NewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewTableViewCell.xib; sourceTree = "<group>"; };
 		C586689E279E7323009C2EC9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -55,11 +55,11 @@
 		C5966647276BBA7900A17CA0 /* firstSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstSubView.swift; sourceTree = "<group>"; };
 		C5966649276BBA9700A17CA0 /* firstSubView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = firstSubView.storyboard; sourceTree = "<group>"; };
 		C59DBA3527AB37A00060F576 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C5A5CF7827A0242300EE495E /* newModelTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newModelTableView.swift; sourceTree = "<group>"; };
 		C5A5CF7C27A02C7100EE495E /* SecondSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSubView.swift; sourceTree = "<group>"; };
 		C5A5CF7E27A02CBC00EE495E /* SecondSubView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecondSubView.storyboard; sourceTree = "<group>"; };
 		C5D13384276C580D00694EBE /* ObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectViewController.swift; sourceTree = "<group>"; };
 		C5D13386276C581E00694EBE /* ObjectViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ObjectViewController.storyboard; sourceTree = "<group>"; };
+		C5F6AA4227B196CA00AA8D1C /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C51B089027AC67B600279990 /* RealmSwift in Frameworks */,
+				C51B088E27AC67B600279990 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,21 +83,21 @@
 			path = ImagePicker;
 			sourceTree = "<group>";
 		};
-		C54D9A6C276E1C1B0023036F /* ChangeObject */ = {
+		C54D9A6C276E1C1B0023036F /* FullPictureView */ = {
 			isa = PBXGroup;
 			children = (
 				C54D9A6D276E1C530023036F /* FullPictureViewController.swift */,
 				C54D9A6F276E1DA50023036F /* FullPictureViewController.storyboard */,
 			);
-			path = ChangeObject;
+			path = FullPictureView;
 			sourceTree = "<group>";
 		};
-		C54D9A71276E2ECB0023036F /* CellsForDocs */ = {
+		C54D9A71276E2ECB0023036F /* SecondCategoriesCells */ = {
 			isa = PBXGroup;
 			children = (
 				C5B09A2827A2EEB4004E453C /* CellOfTableView */,
 			);
-			path = CellsForDocs;
+			path = SecondCategoriesCells;
 			sourceTree = "<group>";
 		};
 		C583075427687A3D003FF19E = {
@@ -118,66 +120,64 @@
 			isa = PBXGroup;
 			children = (
 				C594F42F27ABF28D00878885 /* RealmDataBase */,
+				C583077C27687BF9003FF19E /* FirstCategories */,
 				C52D01C727A88102005B66C8 /* ImagePicker */,
-				C54D9A6C276E1C1B0023036F /* ChangeObject */,
-				C5966646276BBA0500A17CA0 /* FirstSubView */,
-				C5A5CF7327A01D6900EE495E /* SecondSubView */,
-				C54D9A71276E2ECB0023036F /* CellsForDocs */,
-				C5D13383276C57E600694EBE /* ObjectView */,
-				C583077C27687BF9003FF19E /* Main */,
-				C583077427687A44003FF19E /* Cell */,
+				C54D9A6C276E1C1B0023036F /* FullPictureView */,
 				C583076E27687A3E003FF19E /* Info.plist */,
 			);
 			path = MyDocs;
 			sourceTree = "<group>";
 		};
-		C583077427687A44003FF19E /* Cell */ = {
+		C583077427687A44003FF19E /* FirstCategoriesCells */ = {
 			isa = PBXGroup;
 			children = (
 				C583077827687BE1003FF19E /* NewTableViewCell.swift */,
 				C583077927687BE1003FF19E /* NewTableViewCell.xib */,
 			);
-			path = Cell;
+			path = FirstCategoriesCells;
 			sourceTree = "<group>";
 		};
-		C583077C27687BF9003FF19E /* Main */ = {
+		C583077C27687BF9003FF19E /* FirstCategories */ = {
 			isa = PBXGroup;
 			children = (
 				C59DBA3527AB37A00060F576 /* Assets.xcassets */,
 				C583076027687A3D003FF19E /* AppDelegate.swift */,
 				C583076227687A3D003FF19E /* SceneDelegate.swift */,
-				C583077627687B8D003FF19E /* ModelTableView.swift */,
 				C583076427687A3D003FF19E /* ViewController.swift */,
 				C583076627687A3D003FF19E /* Main.storyboard */,
 				C583076B27687A3E003FF19E /* LaunchScreen.storyboard */,
+				C583077427687A44003FF19E /* FirstCategoriesCells */,
+				C5966646276BBA0500A17CA0 /* FirstAddView */,
+				C5D13383276C57E600694EBE /* SecondCategories */,
 			);
-			path = Main;
+			path = FirstCategories;
 			sourceTree = "<group>";
 		};
 		C594F42F27ABF28D00878885 /* RealmDataBase */ = {
 			isa = PBXGroup;
 			children = (
+				C5F6AA4227B196CA00AA8D1C /* DBManager.swift */,
 				C594F43027ABF2BE00878885 /* RealmDataBase.swift */,
 			);
 			path = RealmDataBase;
 			sourceTree = "<group>";
 		};
-		C5966646276BBA0500A17CA0 /* FirstSubView */ = {
+		C5966646276BBA0500A17CA0 /* FirstAddView */ = {
 			isa = PBXGroup;
 			children = (
 				C5966647276BBA7900A17CA0 /* firstSubView.swift */,
 				C5966649276BBA9700A17CA0 /* firstSubView.storyboard */,
 			);
-			path = FirstSubView;
+			path = FirstAddView;
 			sourceTree = "<group>";
 		};
-		C5A5CF7327A01D6900EE495E /* SecondSubView */ = {
+		C5A5CF7327A01D6900EE495E /* SecondAddView */ = {
 			isa = PBXGroup;
 			children = (
 				C5A5CF7C27A02C7100EE495E /* SecondSubView.swift */,
 				C5A5CF7E27A02CBC00EE495E /* SecondSubView.storyboard */,
 			);
-			path = SecondSubView;
+			path = SecondAddView;
 			sourceTree = "<group>";
 		};
 		C5B09A2827A2EEB4004E453C /* CellOfTableView */ = {
@@ -199,14 +199,15 @@
 			path = CellOfCollectionView;
 			sourceTree = "<group>";
 		};
-		C5D13383276C57E600694EBE /* ObjectView */ = {
+		C5D13383276C57E600694EBE /* SecondCategories */ = {
 			isa = PBXGroup;
 			children = (
 				C5D13384276C580D00694EBE /* ObjectViewController.swift */,
 				C5D13386276C581E00694EBE /* ObjectViewController.storyboard */,
-				C5A5CF7827A0242300EE495E /* newModelTableView.swift */,
+				C54D9A71276E2ECB0023036F /* SecondCategoriesCells */,
+				C5A5CF7327A01D6900EE495E /* SecondAddView */,
 			);
-			path = ObjectView;
+			path = SecondCategories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +226,10 @@
 			dependencies = (
 			);
 			name = MyDocs;
+			packageProductDependencies = (
+				C51B088D27AC67B600279990 /* Realm */,
+				C51B088F27AC67B600279990 /* RealmSwift */,
+			);
 			productName = MyDocs;
 			productReference = C583075D27687A3D003FF19E /* MyDocs.app */;
 			productType = "com.apple.product-type.application";
@@ -253,6 +258,9 @@
 				Base,
 			);
 			mainGroup = C583075427687A3D003FF19E;
+			packageReferences = (
+				C51B088C27AC67B600279990 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = C583075E27687A3D003FF19E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -292,14 +300,13 @@
 				C594F43127ABF2BE00878885 /* RealmDataBase.swift in Sources */,
 				C5966648276BBA7900A17CA0 /* firstSubView.swift in Sources */,
 				C52D01C927A8812C005B66C8 /* ImagePicker.swift in Sources */,
+				C5F6AA4127B175AB00AA8D1C /* ObjectViewController.swift in Sources */,
 				C5A5CF7D27A02C7100EE495E /* SecondSubView.swift in Sources */,
 				C583076527687A3D003FF19E /* ViewController.swift in Sources */,
 				C583076127687A3D003FF19E /* AppDelegate.swift in Sources */,
 				C583076327687A3D003FF19E /* SceneDelegate.swift in Sources */,
-				C5D13385276C580D00694EBE /* ObjectViewController.swift in Sources */,
-				C5A5CF7927A0242300EE495E /* newModelTableView.swift in Sources */,
+				C5F6AA4327B196CA00AA8D1C /* DBManager.swift in Sources */,
 				C54D9A6E276E1C530023036F /* FullPictureViewController.swift in Sources */,
-				C583077727687B8D003FF19E /* ModelTableView.swift in Sources */,
 				C54D9A74276E2F2D0023036F /* CellForDocsTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,6 +527,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C51B088C27AC67B600279990 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.22.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C51B088D27AC67B600279990 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C51B088C27AC67B600279990 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		C51B088F27AC67B600279990 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C51B088C27AC67B600279990 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C583075527687A3D003FF19E /* Project object */;
 }

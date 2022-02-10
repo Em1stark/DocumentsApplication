@@ -7,22 +7,34 @@
 
 import UIKit
 import SwiftUI
-
+import RealmSwift
 protocol newCreationDelegate: AnyObject {
-    func created(model: newModelTableView)
+    func created(model: String)
 }
 
-class SecondSubView: UIViewController, UITextFieldDelegate {
-    
+class SecondSubView: UIViewController, UITextFieldDelegate{
+       
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var cancelButton: UIButton!
     
     weak var delegate: newCreationDelegate?
+    let dbmanager: DBManager = DBManagerImpl()
+    var indexCellOfFirstTableView: ObjectId!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //let models = dbmanager.obtainCategories()
+        //return print("\(models)")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cancelButton.tintColor = .systemGray4
+        cancelButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         
         saveButton.tintColor = .black
         saveButton.layer.cornerRadius = 14
@@ -41,12 +53,11 @@ class SecondSubView: UIViewController, UITextFieldDelegate {
         textLabel.font = .boldSystemFont(ofSize: 24)
         updateSaveButtonState()
     }
-    var newObject = newModelTableView(name: "", images: [])
     
     @IBAction func saveButton(_ sender: Any) {
         let nameText = textField.text ?? ""
-        let newObject = newModelTableView(name: nameText, images: [])
-        delegate?.created(model: newObject)
+        dbmanager.saveCategory(nameText: nameText, index: indexCellOfFirstTableView)
+        delegate?.created(model: "Передача пустого делегата в ObjectViewController")
         dismiss(animated: true)
     }
     

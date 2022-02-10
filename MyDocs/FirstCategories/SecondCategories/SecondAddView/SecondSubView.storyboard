@@ -16,10 +16,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Name of category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hy1-tD-grX">
-                                <rect key="frame" x="79" y="118" width="256" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egS-cU-J8D">
+                                <rect key="frame" x="352" y="66" width="42" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="GgG-tq-yJf"/>
+                                    <constraint firstAttribute="width" constant="42" id="c6D-RV-YSX"/>
+                                    <constraint firstAttribute="height" constant="42" id="zKz-CI-iBI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <color key="titleColor" systemColor="systemGray3Color"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="JXT-nX-ULL"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQf-Sg-spp">
+                                <rect key="frame" x="96" y="65" width="222" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgB-aF-rLg">
+                                <rect key="frame" x="41" y="195" width="332" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="XbN-Ve-g23"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Add">
+                                    <backgroundConfiguration key="background" cornerRadius="14"/>
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                    <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="saveButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="psf-YU-nJ2"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Name of category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hy1-tD-grX">
+                                <rect key="frame" x="79" y="120" width="256" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="aga-x2-Cjv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -33,52 +69,22 @@
                                     <action selector="textChanged:" destination="Y6W-OH-hqX" eventType="editingChanged" id="KfJ-qj-zUH"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egS-cU-J8D">
-                                <rect key="frame" x="364" y="60" width="30" height="34"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="X">
-                                    <color key="titleColor" systemColor="systemRedColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="JXT-nX-ULL"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQf-Sg-spp">
-                                <rect key="frame" x="183" y="60" width="48" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgB-aF-rLg">
-                                <rect key="frame" x="41" y="187" width="332" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="XbN-Ve-g23"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Add">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                    <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="saveButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="psf-YU-nJ2"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Wf8-Zv-wRv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="egS-cU-J8D" firstAttribute="trailing" secondItem="PEC-LX-Po2" secondAttribute="trailingMargin" id="3a5-E5-dbw"/>
-                            <constraint firstItem="EQf-Sg-spp" firstAttribute="top" secondItem="Wf8-Zv-wRv" secondAttribute="top" constant="16" id="5mB-q1-pg5"/>
-                            <constraint firstItem="EQf-Sg-spp" firstAttribute="bottom" secondItem="egS-cU-J8D" secondAttribute="bottom" id="A7g-cE-bZh"/>
-                            <constraint firstItem="EQf-Sg-spp" firstAttribute="centerX" secondItem="hy1-tD-grX" secondAttribute="centerX" id="B7l-X4-R5R"/>
-                            <constraint firstItem="Wf8-Zv-wRv" firstAttribute="trailing" secondItem="hy1-tD-grX" secondAttribute="trailing" constant="79" id="Zdi-Ql-dyg"/>
+                            <constraint firstItem="EQf-Sg-spp" firstAttribute="centerX" secondItem="hy1-tD-grX" secondAttribute="centerX" id="0K9-CO-d9z"/>
+                            <constraint firstItem="egS-cU-J8D" firstAttribute="top" secondItem="Wf8-Zv-wRv" secondAttribute="top" constant="22" id="8gZ-a0-osF"/>
+                            <constraint firstItem="bgB-aF-rLg" firstAttribute="top" secondItem="egS-cU-J8D" secondAttribute="bottom" constant="87" id="Hjr-PL-OfY"/>
+                            <constraint firstItem="EQf-Sg-spp" firstAttribute="leading" secondItem="Wf8-Zv-wRv" secondAttribute="leading" constant="96" id="O58-yd-VAl"/>
+                            <constraint firstItem="hy1-tD-grX" firstAttribute="leading" secondItem="Wf8-Zv-wRv" secondAttribute="leading" constant="79" id="Z34-Is-RjQ"/>
                             <constraint firstItem="Wf8-Zv-wRv" firstAttribute="trailing" secondItem="bgB-aF-rLg" secondAttribute="trailing" constant="41" id="ase-m7-Nvs"/>
+                            <constraint firstItem="hy1-tD-grX" firstAttribute="top" secondItem="EQf-Sg-spp" secondAttribute="bottom" constant="28" id="cCX-EY-CaZ"/>
                             <constraint firstItem="bgB-aF-rLg" firstAttribute="leading" secondItem="Wf8-Zv-wRv" secondAttribute="leading" constant="41" id="dof-IW-oL2"/>
-                            <constraint firstItem="bgB-aF-rLg" firstAttribute="top" secondItem="hy1-tD-grX" secondAttribute="bottom" constant="25" id="e7w-rF-vKU"/>
-                            <constraint firstItem="bgB-aF-rLg" firstAttribute="leading" secondItem="hy1-tD-grX" secondAttribute="leading" constant="-38" id="ePB-Mm-mfy"/>
-                            <constraint firstItem="hy1-tD-grX" firstAttribute="top" secondItem="egS-cU-J8D" secondAttribute="bottom" constant="24" id="jbJ-v8-Imm"/>
-                            <constraint firstItem="egS-cU-J8D" firstAttribute="top" secondItem="Wf8-Zv-wRv" secondAttribute="top" constant="16" id="uSZ-Rg-yug"/>
+                            <constraint firstItem="bgB-aF-rLg" firstAttribute="top" secondItem="hy1-tD-grX" secondAttribute="bottom" constant="31" id="fEg-LD-pop"/>
+                            <constraint firstItem="egS-cU-J8D" firstAttribute="trailing" secondItem="PEC-LX-Po2" secondAttribute="trailingMargin" id="n9T-Pp-aRd"/>
+                            <constraint firstItem="hy1-tD-grX" firstAttribute="centerX" secondItem="bgB-aF-rLg" secondAttribute="centerX" id="pNV-Ct-0Jt"/>
+                            <constraint firstItem="EQf-Sg-spp" firstAttribute="top" secondItem="Wf8-Zv-wRv" secondAttribute="top" constant="21" id="ucZ-av-0dU"/>
                         </constraints>
                     </view>
                     <connections>
@@ -97,8 +103,8 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

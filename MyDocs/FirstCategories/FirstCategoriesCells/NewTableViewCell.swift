@@ -14,6 +14,7 @@ class NewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        myDefinition.textColor = UIColor(red: 0.317, green: 0.311, blue: 0.311, alpha: 1)
         // Initialization code
         
     }
@@ -25,7 +26,7 @@ class NewTableViewCell: UITableViewCell {
     }
     
     // Func of configuration cell
-    func set(object: modelTableView){
+    func set(object: User){
         self.myFace.text = object.face
         self.myDefinition.text = object.definition
     }

@@ -7,13 +7,13 @@
 
 import UIKit
 import SwiftUI
+import RealmSwift
 
 protocol CreationDelegate: AnyObject {
-    func created(model: modelTableView)
+    func created(model: String)
 }
 
 class firstSubView: UIViewController, UITextFieldDelegate {
-    
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
@@ -22,6 +22,14 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIButton!
     
     weak var delegate: CreationDelegate?
+    let dbManager: DBManager = DBManagerImpl()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+//        let models = dbManager.obtainUsers()
+//        print("\(models)")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +42,8 @@ class firstSubView: UIViewController, UITextFieldDelegate {
         iconTextField.textColor = UIColor(red: 0.488, green: 0.488, blue: 0.488, alpha: 1)
         iconTextField.placeholder = "Name"
 
-        cancelButton.tintColor = .red
+        cancelButton.tintColor = .systemGray4
+        cancelButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         
         view.backgroundColor = .white
         let spacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
@@ -60,8 +69,6 @@ class firstSubView: UIViewController, UITextFieldDelegate {
         
     }
     
-    var newObject = modelTableView(face: "", definition: "")
-    
     // Realization cancelButton
     @IBAction func cancelButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -71,8 +78,9 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     @IBAction func saveButton(_ sender: UIButton) {
         let nameText = nameTextField.text ?? ""
         let iconText = iconTextField.text ?? ""
-        let newObject = modelTableView(face: nameText, definition: iconText)
-        delegate?.created(model: newObject)
+        dbManager.saveUser(face: nameText, definition: iconText)
+        delegate?.created(model: "Передача пустого делегата во ViewController")
+
         dismiss(animated: true)
     }
     
@@ -89,4 +97,5 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     }
     
 }
+
 

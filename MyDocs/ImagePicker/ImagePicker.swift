@@ -71,6 +71,7 @@ extension ImagePicker: UIImagePickerControllerDelegate {
 
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.pickerController(picker, didSelect: nil)
+        
     }
 
     public func imagePickerController(_ picker: UIImagePickerController,

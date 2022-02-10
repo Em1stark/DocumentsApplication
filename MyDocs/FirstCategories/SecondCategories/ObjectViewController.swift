@@ -7,13 +7,14 @@
 
 import UIKit
 import SwiftUI
+import RealmSwift
 
 protocol DocDelegate: AnyObject {
     func show()
 }
 
 class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
     weak var delegate: DocDelegate?
     
     @IBOutlet weak var addDocButton: UIButton!
@@ -21,33 +22,38 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var secondLabel: UILabel!
     
-    var photo: UIImage!
-    var imagePicker: ImagePicker!
-    var docs = [newModelTableView]() //newModelTableView(name: "Test", images: [])
+    let mainRealm2 = try! Realm()
     
-    var idDocs: Int = 0
-
+    var imagePicker: ImagePicker!
+    
+    let dbManager: DBManager = DBManagerImpl()
+    var usersDocumentsArray: Results<UserDocument>!
+    var imagesArray: Results<CategoryImage>!
+    var idCategory: ObjectId!
+    var indexCellOfFirstTableView: ObjectId!
+    var secondNameOfLabel: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        usersDocumentsArray = mainRealm2.objects(UserDocument.self).where({$0.idParent == indexCellOfFirstTableView})
+        imagesArray = mainRealm2.objects(CategoryImage.self)
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
-        
+
         let nib = UINib(nibName: "CellForDocsTableView", bundle: nil)
         docTableView.register(nib, forCellReuseIdentifier: "CellForDocsTableView")
         docTableView.allowsSelection = false
         docTableView.delegate = self
         docTableView.dataSource = self
-        
-        secondLabel.text = "Documents"
-        secondLabel.tintColor = .black
+        secondLabel.text = secondNameOfLabel
+        secondLabel.tintColor = UIColor(red: 0.217, green: 0.211, blue: 0.211, alpha: 1)
         view.backgroundColor = .init(red: 0.887, green: 0.954, blue: 1, alpha: 1)
         docTableView.backgroundColor = .init(cgColor: .init(red: 0.945, green: 0.973, blue: 1, alpha: 1))
-        backButton.tintColor = .black
+        backButton.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        backButton.setTitle("Back", for: .normal)
-        addDocButton.tintColor = .black
+        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        addDocButton.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         addDocButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        addDocButton.setTitle("Add", for: .normal)
+        addDocButton.setImage(UIImage(systemName: "plus"), for: .normal)
         
     }
     
@@ -59,9 +65,8 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
             sheet.detents = [.medium()]
             sheet.preferredCornerRadius = 32
             sheet.prefersGrabberVisible = true
-    
+            sheetPresentationController.indexCellOfFirstTableView = indexCellOfFirstTableView
         }
-
         self.present(sheetPresentationController, animated: true, completion: nil)
     } 
     
@@ -74,56 +79,56 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return docs.count
+        return usersDocumentsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellForDocsTableView", for: indexPath) as! CellForDocsTableView
-        let object = docs[indexPath.row]
-        cell.set(object: object)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellForDocsTableView", for: indexPath) as? CellForDocsTableView else { return  UITableViewCell()}
+        let object = usersDocumentsArray[indexPath.row]
+        cell.idCategoryAfterTapButton = object.id
+        cell.set(arrayOfImages: object.arrayOfImages.reversed().reversed(), nameLabel: object.nameOfCategory)
         cell.delegate = self
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        
         return .delete
     }
     
     // Realization delete objects from tableView
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            docs.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let categoryElement = usersDocumentsArray[indexPath.row]
+            dbManager.deleteCategory(userDocumentsArray: usersDocumentsArray, index: categoryElement.id) {
+            [weak self] in // Capture list
+            self?.docTableView.deleteRows(at: [indexPath], with: .fade)
+            self?.docTableView.reloadData()
+            }
         }
     }
-    
 }
 
 extension ObjectViewController: newCreationDelegate {
-    func created(model: newModelTableView) {
-        docs.append(model)
+    func created(model: String) {
+
         docTableView.reloadData()
     }
 }
 
 extension ObjectViewController: MyTableViewCellDelegate{
     func addButtonTapped(name: String) {
-       
-//        for i in 0...docs.count - 1 where docs[i].name == name{
-//                idDocs = i
-//
-//        }
-        idDocs = docs.firstIndex(where: { $0.name == name })!
+        let firstIndexWithName = usersDocumentsArray.firstIndex(where: {$0.nameOfCategory == name})!
+        idCategory = usersDocumentsArray[firstIndexWithName].id
         self.imagePicker.present(from: self.view)
+        
     }
     
     func look(image: UIImage) {
-        print("Работает")
         let storyboard = UIStoryboard(name: "FullPictureViewController", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "FullPictureViewController") as? FullPictureViewController else { return }
         vc.modalPresentationStyle = .fullScreen
+        
         vc.view.backgroundColor = .init(red: 0.887, green: 0.954, blue: 1, alpha: 1)
         vc.fullImage.backgroundColor = .init(cgColor: .init(red: 0.945, green: 0.973, blue: 1, alpha: 1))
         vc.fullImage.image = image
@@ -135,16 +140,17 @@ extension ObjectViewController: MyTableViewCellDelegate{
 extension ObjectViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         if image != nil{
-        let oldCategory = docs[idDocs]
-        let newImages = oldCategory.images + [image!]
-        let newCategory = newModelTableView.init(name: oldCategory.name, images: newImages)
-        docs[idDocs] = newCategory
-            docTableView.reloadData()
-            
+            let imageConvertedToData = image!.pngData()
+            try! mainRealm2.write{
+                for userDocument in mainRealm2.objects(UserDocument.self).where({$0.id == idCategory}){
+                    let addedElementToCategoryImage = CategoryImage(image: imageConvertedToData, idParent: userDocument.id, idGrandParent: indexCellOfFirstTableView)
+                    userDocument.arrayOfImages.append(addedElementToCategoryImage)
+                    mainRealm2.add(userDocument)
+                    docTableView.reloadData()
+                }
+            }
         }else{
             docTableView.reloadData()
         }
-        
     }
-    
 }
