@@ -9,26 +9,16 @@ import UIKit
 import SwiftUI
 import RealmSwift
 
-protocol number: AnyObject{
-    func check(number: Int)
-}
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
-    let cellSpacingHeight: CGFloat = 5
     var count = 0
     let dbManager: DBManager = DBManagerImpl()
     let mainRealm2 = try! Realm()
     var realmDataBaseArray: Results<User>!
-    
-    // Array of objects
-    var personOfFamily = [modelTableView(face: "🧔‍♂️", definition: "Dad"),
-                          modelTableView(face: "👩‍⚕️", definition: "Mum"),
-                          modelTableView(face: "🤵", definition: "Bro"),
-                          modelTableView(face: "🦸‍♀️", definition: "Sister")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +26,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         realmDataBaseArray = mainRealm2.objects(User.self)
         
         // Connect nib for element (cell) of tableView
-        firstLabel.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
+        firstLabel.tintColor = UIColor(red: 0.217, green: 0.211, blue: 0.211, alpha: 1)
         firstLabel.text = "Documents"
         view.backgroundColor = .init(red: 0.887, green: 0.954, blue: 1, alpha: 1)
         let nib = UINib(nibName: "NewTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "NewTableViewCell")
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -53,6 +43,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         //addButton.setTitle("Add", for: .normal)
         addButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        
     }
     
     // Create edit Button
@@ -101,6 +92,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.set(object: object)
         cell.backgroundColor = .init(red: 0.983, green: 0.983, blue: 0.983, alpha: 1)
         
+        
         return cell
     }
     
@@ -129,26 +121,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     // Realization logic for move objects in tableView
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let movedObject = personOfFamily[sourceIndexPath.row]
-        personOfFamily.remove(at: sourceIndexPath.row)
-        personOfFamily.insert(movedObject, at: destinationIndexPath.row)
-        tableView.reloadData()
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        let movedObject = personOfFamily[sourceIndexPath.row]
+//        personOfFamily.remove(at: sourceIndexPath.row)
+//        personOfFamily.insert(movedObject, at: destinationIndexPath.row)
+//        tableView.reloadData()
+//    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 64 //or whatever you need
     }
     
     // Logic for tap on cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     
         tableView.deselectRow(at: indexPath, animated: true)
-
-                let storyboard = UIStoryboard(name: "ObjectViewController", bundle: nil)
+        let storyboard = UIStoryboard(name: "ObjectViewController", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "ObjectViewController") as? ObjectViewController else { return }
         let object = realmDataBaseArray[indexPath.row]
-        
         vc.indexCellOfFirstTableView = object.id
-        
         //vc.modalTransitionStyle = .flipHorizontal // это значение можно менять для разных видов анимации появления
-        vc.modalPresentationStyle = .fullScreen // это та самая волшебная строка, убрав или закомментировав ее, вы получите появление смахиваемого контроллера
+        vc.modalPresentationStyle = .fullScreen  // это та самая волшебная строка, убрав или закомментировав ее, вы получите появление смахиваемого контроллера
+        vc.secondNameOfLabel = object.definition
+        
         self.present(vc, animated: true, completion: nil)
     }
 }

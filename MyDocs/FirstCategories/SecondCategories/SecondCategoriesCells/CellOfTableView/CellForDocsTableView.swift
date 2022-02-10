@@ -22,26 +22,23 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
     @IBOutlet weak var nameLabel: UILabel!
     
     let mainRealm2 = try! Realm()
-    var arrayOfCategories: Results<UserDocument>!
     var arrayOfImages = [CategoryImage]()
     var idCategoryAfterTapButton: ObjectId!
-   // var images: [UIImage] = []
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        print("Лёша: \(arrayOfImages as Any)")
         contentView.backgroundColor = .init(cgColor: .init(red: 0.945, green: 0.973, blue: 1, alpha: 1))
         collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "collectionViewID")
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .init(cgColor: .init(red: 0.945, green: 0.973, blue: 1, alpha: 1))
-        addButtonTapped.titleLabel?.text = "Photo"
-        addButtonTapped.tintColor = .black
+        //addButtonTapped.titleLabel?.text = "Photo"
+        addButtonTapped.tintColor = UIColor(red: 0.517, green: 0.511, blue: 0.511, alpha: 1)
+        addButtonTapped.setImage(UIImage(systemName: "camera.on.rectangle"), for: .normal)
+        nameLabel.textColor = UIColor(red: 0.317, green: 0.311, blue: 0.311, alpha: 1)
     }
     @IBAction func addButtonTapped(_ sender: UIButton) {
 
-        
         delegate?.addButtonTapped(name: nameLabel.text!)
         collectionView.reloadData()
         }
@@ -64,14 +61,13 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
         let data = arrayOfImages[indexPath.item].image
         let dataConvertedToImage: UIImage = UIImage(data: data!)!
         print(arrayOfImages)
-        cell.setupCell(image: dataConvertedToImage)
+        cell.docImage.image = dataConvertedToImage
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-                print("Выбрана ячейка: (\(indexPath.section), \(indexPath.item))")
       
         addButtonTapped.addTarget(self, action: #selector(getter: addButtonTapped), for: .touchUpInside)
         let data = arrayOfImages[indexPath.item].image
@@ -79,7 +75,7 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
         self.delegate?.look(image: dataConvertedToImage)
     }
     
-    func set(arrayOfImages: [CategoryImage], index: ObjectId, nameLabel: String){
+    func set(arrayOfImages: [CategoryImage], nameLabel: String){
         self.nameLabel.text = nameLabel
         self.arrayOfImages = arrayOfImages
         collectionView.reloadData()

@@ -27,8 +27,8 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        let models = dbManager.obtainUsers()
-        print("\(models)")
+//        let models = dbManager.obtainUsers()
+//        print("\(models)")
     }
     
     override func viewDidLoad() {
