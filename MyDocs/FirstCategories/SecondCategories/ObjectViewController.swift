@@ -141,14 +141,8 @@ extension ObjectViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         if image != nil{
             let imageConvertedToData = image!.pngData()
-            try! mainRealm2.write{
-                for userDocument in mainRealm2.objects(UserDocument.self).where({$0.id == idCategory}){
-                    let addedElementToCategoryImage = CategoryImage(image: imageConvertedToData, idParent: userDocument.id, idGrandParent: indexCellOfFirstTableView)
-                    userDocument.arrayOfImages.append(addedElementToCategoryImage)
-                    mainRealm2.add(userDocument)
-                    docTableView.reloadData()
-                }
-            }
+            dbManager.saveImage(image: imageConvertedToData, idCategory: idCategory, idUser: indexCellOfFirstTableView)
+            docTableView.reloadData()
         }else{
             docTableView.reloadData()
         }

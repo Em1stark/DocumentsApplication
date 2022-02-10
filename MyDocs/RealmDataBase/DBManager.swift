@@ -15,6 +15,8 @@ protocol DBManager {
     
     func saveCategory(nameText: String, index: ObjectId)
     
+    func saveImage(image: Data?, idCategory: ObjectId, idUser: ObjectId)
+    
     func deleteUser(realmDataBaseArray: Results<User>, index: ObjectId, completion: @escaping() -> Void ) // избегающее замыкание
     
     func deleteCategory(userDocumentsArray: Results<UserDocument>, index: ObjectId,  completion: @escaping() -> Void )
@@ -27,6 +29,10 @@ protocol DBManager {
 class DBManagerImpl: DBManager{
     
     fileprivate lazy var mainRealm = try! Realm(configuration: .defaultConfiguration)
+    
+    func getData(){
+        
+    }
     
     func saveUser(face: String, definition: String){
         try! mainRealm.write{
@@ -44,6 +50,16 @@ class DBManagerImpl: DBManager{
                 let category = UserDocument(nameOfCategory: nameText, idParent: index, arrayOfImages: [])
                 element.userCategories.append(category)
                 idParent += 1
+            }
+        }
+    }
+    
+    func saveImage(image: Data?, idCategory: ObjectId, idUser: ObjectId){
+        try! mainRealm.write{
+            for userDocument in mainRealm.objects(UserDocument.self).where({$0.id == idCategory}){
+                let addedElementToCategoryImage = CategoryImage(image: image, idParent: userDocument.id, idGrandParent: idUser)
+                userDocument.arrayOfImages.append(addedElementToCategoryImage)
+                mainRealm.add(userDocument)
             }
         }
     }
