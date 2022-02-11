@@ -51,10 +51,10 @@ class CategoryImage: Object{
     @Persisted(primaryKey: true) var id = ObjectId.generate()
     @Persisted var idParent: ObjectId
     @Persisted var idGrandParent: ObjectId
-    @Persisted var image: Data?
+    @Persisted var image: Data
     
     
-    convenience init(image: Data?, idParent: ObjectId, idGrandParent: ObjectId) {
+    convenience init(image: Data, idParent: ObjectId, idGrandParent: ObjectId) {
         self.init()
         self.image = image
         self.idParent = idParent

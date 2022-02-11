@@ -156,8 +156,8 @@
 		C594F42F27ABF28D00878885 /* RealmDataBase */ = {
 			isa = PBXGroup;
 			children = (
-				C5F6AA4227B196CA00AA8D1C /* DBManager.swift */,
 				C594F43027ABF2BE00878885 /* RealmDataBase.swift */,
+				C5F6AA4227B196CA00AA8D1C /* DBManager.swift */,
 			);
 			path = RealmDataBase;
 			sourceTree = "<group>";

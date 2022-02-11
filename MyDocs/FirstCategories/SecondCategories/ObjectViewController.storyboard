@@ -51,21 +51,28 @@
                                     <action selector="addDocButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BVc-z6-F4m"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDY-t4-vhi">
+                                <rect key="frame" x="273" y="54" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="editCategoryButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="iil-Aw-OqN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="HBk-p6-O8S" firstAttribute="firstBaseline" secondItem="0j9-z9-ZNn" secondAttribute="firstBaseline" id="5MK-Fm-i1Z"/>
+                            <constraint firstItem="0j9-z9-ZNn" firstAttribute="top" secondItem="HBk-p6-O8S" secondAttribute="top" id="2gZ-CF-9sv"/>
                             <constraint firstItem="lqE-UB-AVi" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="8BS-uI-wYp"/>
-                            <constraint firstItem="0j9-z9-ZNn" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="E7g-yF-idf"/>
+                            <constraint firstItem="HBk-p6-O8S" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="Auo-rx-me9"/>
                             <constraint firstItem="j1U-4v-zj4" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Hyt-4y-EPf"/>
-                            <constraint firstItem="HBk-p6-O8S" firstAttribute="baseline" secondItem="0j9-z9-ZNn" secondAttribute="baseline" id="KYJ-86-Bpc"/>
+                            <constraint firstItem="lqE-UB-AVi" firstAttribute="top" secondItem="0j9-z9-ZNn" secondAttribute="bottom" constant="6.6666666666666856" id="ODN-gT-aJF"/>
                             <constraint firstItem="j1U-4v-zj4" firstAttribute="leading" secondItem="HBk-p6-O8S" secondAttribute="trailing" constant="25" id="OtW-au-ZjQ"/>
                             <constraint firstItem="lqE-UB-AVi" firstAttribute="top" secondItem="j1U-4v-zj4" secondAttribute="bottom" constant="16.666666666666671" id="S9d-zh-pOV"/>
                             <constraint firstItem="HBk-p6-O8S" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leadingMargin" id="WeA-Ak-PqJ"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0j9-z9-ZNn" secondAttribute="trailing" constant="16" id="Xoo-lO-O8g"/>
-                            <constraint firstItem="HBk-p6-O8S" firstAttribute="top" secondItem="0j9-z9-ZNn" secondAttribute="top" id="b1v-Yo-59v"/>
-                            <constraint firstItem="j1U-4v-zj4" firstAttribute="centerY" secondItem="0j9-z9-ZNn" secondAttribute="centerY" constant="-9.9999999999999929" id="eVE-7d-qCg"/>
+                            <constraint firstItem="0j9-z9-ZNn" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailingMargin" id="jUo-3O-HNd"/>
                             <constraint firstItem="j1U-4v-zj4" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="k5J-vr-J9v"/>
                             <constraint firstItem="lqE-UB-AVi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="l5u-sx-KXr"/>
                             <constraint firstItem="j1U-4v-zj4" firstAttribute="centerX" secondItem="lqE-UB-AVi" secondAttribute="centerX" id="wVT-pi-tuY"/>
@@ -75,6 +82,7 @@
                         <outlet property="addDocButton" destination="0j9-z9-ZNn" id="WL3-G5-kmc"/>
                         <outlet property="backButton" destination="HBk-p6-O8S" id="ZWT-6d-90X"/>
                         <outlet property="docTableView" destination="lqE-UB-AVi" id="fzN-r8-wXp"/>
+                        <outlet property="editCategoryButton" destination="bDY-t4-vhi" id="mew-2T-NYv"/>
                         <outlet property="secondLabel" destination="j1U-4v-zj4" id="ix2-mT-SQc"/>
                     </connections>
                 </viewController>

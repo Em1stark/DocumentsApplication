@@ -11,11 +11,15 @@ import UIKit
 
 protocol DBManager {
     
+    func getUserFromData() -> Results<User>
+    
+    func getCategoryFromData(id: ObjectId) -> Results<UserDocument>
+    
     func saveUser(face: String, definition: String)
     
     func saveCategory(nameText: String, index: ObjectId)
     
-    func saveImage(image: Data?, idCategory: ObjectId, idUser: ObjectId)
+    func saveImage(image: Data, idCategory: ObjectId, idUser: ObjectId)
     
     func deleteUser(realmDataBaseArray: Results<User>, index: ObjectId, completion: @escaping() -> Void ) // избегающее замыкание
     
@@ -26,19 +30,27 @@ protocol DBManager {
     func obtainCategories() -> [UserDocument]
 }
 
+// Realization func for connect with DB
+
 class DBManagerImpl: DBManager{
     
     fileprivate lazy var mainRealm = try! Realm(configuration: .defaultConfiguration)
     
-    func getData(){
+    func getUserFromData() -> Results<User>{
         
+        
+        return mainRealm.objects(User.self)
     }
     
+    func getCategoryFromData(id: ObjectId) -> Results<UserDocument>{
+        
+        return mainRealm.objects(UserDocument.self).where({$0.idParent == id})
+    }
+    
+
     func saveUser(face: String, definition: String){
         try! mainRealm.write{
-            var userID = mainRealm.objects(User.self).endIndex
             let user = User(face: face, definition: definition, userCategories: [])
-            userID += 1
             mainRealm.add(user)
         }
     }
@@ -46,15 +58,13 @@ class DBManagerImpl: DBManager{
     func saveCategory(nameText: String, index: ObjectId){
         try! mainRealm.write{
             for element in mainRealm.objects(User.self).elements where element.id == index {
-                var idParent = element.userCategories.endIndex
                 let category = UserDocument(nameOfCategory: nameText, idParent: index, arrayOfImages: [])
                 element.userCategories.append(category)
-                idParent += 1
             }
         }
     }
     
-    func saveImage(image: Data?, idCategory: ObjectId, idUser: ObjectId){
+    func saveImage(image: Data, idCategory: ObjectId, idUser: ObjectId){
         try! mainRealm.write{
             for userDocument in mainRealm.objects(UserDocument.self).where({$0.id == idCategory}){
                 let addedElementToCategoryImage = CategoryImage(image: image, idParent: userDocument.id, idGrandParent: idUser)

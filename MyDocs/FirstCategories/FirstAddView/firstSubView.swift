@@ -34,6 +34,8 @@ class firstSubView: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
         nameTextField.delegate = self
         nameTextField.textColor = UIColor(red: 0.488, green: 0.488, blue: 0.488, alpha: 1)
         nameTextField.placeholder = "Icon"
@@ -45,7 +47,6 @@ class firstSubView: UIViewController, UITextFieldDelegate {
         cancelButton.tintColor = .systemGray4
         cancelButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         
-        view.backgroundColor = .white
         let spacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
         nameTextField.backgroundColor = UIColor(red: 0.875, green: 0.875, blue: 0.875, alpha: 0.5)
         nameTextField.borderStyle = .none

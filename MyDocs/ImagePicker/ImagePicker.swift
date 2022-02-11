@@ -1,7 +1,7 @@
 import UIKit
 
 public protocol ImagePickerDelegate: AnyObject {
-    func didSelect(image: UIImage?)
+    func didSelect(image: UIImage)
     
 }
 
@@ -63,7 +63,7 @@ open class ImagePicker: NSObject {
     private func pickerController(_ controller: UIImagePickerController, didSelect image: UIImage?) {
         controller.dismiss(animated: true, completion: nil)
 
-        self.delegate?.didSelect(image: image)
+        self.delegate?.didSelect(image: image ?? UIImage())
     }
 }
 

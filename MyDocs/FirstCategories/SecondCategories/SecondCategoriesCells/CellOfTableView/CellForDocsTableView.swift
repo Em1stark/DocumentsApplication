@@ -9,28 +9,31 @@ import UIKit
 import RealmSwift
 
 protocol MyTableViewCellDelegate: AnyObject{
-    func look(image: UIImage)
+    func look(image: UIImage?)
     func addButtonTapped(name: String)
 }
 
 class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
-    weak var delegate: MyTableViewCellDelegate?
-    
     @IBOutlet weak var addButtonTapped: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    let mainRealm2 = try! Realm()
+    weak var delegate: MyTableViewCellDelegate?
+    
     var arrayOfImages = [CategoryImage]()
     var idCategoryAfterTapButton: ObjectId!
 
-    override func awakeFromNib() {
+    override func awakeFromNib(){
         super.awakeFromNib()
+        
         contentView.backgroundColor = .init(cgColor: .init(red: 0.945, green: 0.973, blue: 1, alpha: 1))
+        
         collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "collectionViewID")
+        
         collectionView.dataSource = self
         collectionView.delegate = self
+        
         collectionView.backgroundColor = .init(cgColor: .init(red: 0.945, green: 0.973, blue: 1, alpha: 1))
         //addButtonTapped.titleLabel?.text = "Photo"
         addButtonTapped.tintColor = UIColor(red: 0.517, green: 0.511, blue: 0.511, alpha: 1)
@@ -39,7 +42,7 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
     }
     @IBAction func addButtonTapped(_ sender: UIButton) {
 
-        delegate?.addButtonTapped(name: nameLabel.text!)
+        delegate?.addButtonTapped(name: nameLabel.text ?? "")
         collectionView.reloadData()
         }
     
@@ -56,12 +59,14 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewID", for: indexPath) as! CollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewID", for: indexPath) as? CollectionViewCell else { return CollectionViewCell()}
         
         let data = arrayOfImages[indexPath.item].image
-        let dataConvertedToImage: UIImage = UIImage(data: data!)!
-        print(arrayOfImages)
+        let dataConvertedToImage: UIImage? = UIImage(data: data)
+        
         cell.docImage.image = dataConvertedToImage
+        cell.deleteImage.tintColor = .systemGray2
+        cell.deleteImage.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         
         return cell
     }
@@ -71,7 +76,7 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
       
         addButtonTapped.addTarget(self, action: #selector(getter: addButtonTapped), for: .touchUpInside)
         let data = arrayOfImages[indexPath.item].image
-        let dataConvertedToImage: UIImage = UIImage(data: data!)!
+        let dataConvertedToImage: UIImage? = UIImage(data: data)
         self.delegate?.look(image: dataConvertedToImage)
     }
     

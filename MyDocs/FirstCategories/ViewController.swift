@@ -15,15 +15,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
-    var count = 0
+    
     let dbManager: DBManager = DBManagerImpl()
-    let mainRealm2 = try! Realm()
-    var realmDataBaseArray: Results<User>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        realmDataBaseArray = mainRealm2.objects(User.self)
         
         // Connect nib for element (cell) of tableView
         firstLabel.tintColor = UIColor(red: 0.217, green: 0.211, blue: 0.211, alpha: 1)
@@ -57,14 +53,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableView.setEditing(true, animated: true)
             editButton.setImage(UIImage(systemName: "list.bullet.rectangle.portrait.fill"), for: .normal)
             addButton.isEnabled = false
-            
         }
     }
     
     // create addButton
     @IBAction func addButton(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "firstSubView", bundle: nil)
-        
         guard let sheetPresentationController = storyboard.instantiateViewController(withIdentifier: "firstSubView") as? firstSubView else { return
         }
         sheetPresentationController.delegate = self
@@ -81,14 +75,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // TableView Funcs
     // Number of rows in section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return realmDataBaseArray.count
+        return dbManager.getUserFromData().count
     }
     
     // Change cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NewTableViewCell", for: indexPath) as! NewTableViewCell
-        let object = realmDataBaseArray[indexPath.row]
-        //object._id
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewTableViewCell", for: indexPath) as? NewTableViewCell else { return UITableViewCell()}
+        let object = dbManager.getUserFromData()[indexPath.row]
         cell.set(object: object)
         cell.backgroundColor = .init(red: 0.983, green: 0.983, blue: 0.983, alpha: 1)
         
@@ -106,8 +99,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 //            dbManager.deleteUser(realmDataBaseArray: realmDataBaseArray, tableView: tableView, indexPath: indexPath)
-            let userElement = realmDataBaseArray[indexPath.row]
-            dbManager.deleteUser(realmDataBaseArray: realmDataBaseArray, index: userElement.id) {
+            let userElement = dbManager.getUserFromData()[indexPath.row]
+            dbManager.deleteUser(realmDataBaseArray: dbManager.getUserFromData(), index: userElement.id) {
                 [weak self] in // Capture list
                 self?.tableView.deleteRows(at: [indexPath], with: .fade)
                 self?.tableView.reloadData()
@@ -138,12 +131,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard(name: "ObjectViewController", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "ObjectViewController") as? ObjectViewController else { return }
-        let object = realmDataBaseArray[indexPath.row]
+        let object = dbManager.getUserFromData()[indexPath.row]
         vc.indexCellOfFirstTableView = object.id
-        //vc.modalTransitionStyle = .flipHorizontal // это значение можно менять для разных видов анимации появления
         vc.modalPresentationStyle = .fullScreen  // это та самая волшебная строка, убрав или закомментировав ее, вы получите появление смахиваемого контроллера
         vc.secondNameOfLabel = object.definition
-        
+        //vc.modalTransitionStyle = .flipHorizontal // это значение можно менять для разных видов анимации появления
+
         self.present(vc, animated: true, completion: nil)
     }
 }

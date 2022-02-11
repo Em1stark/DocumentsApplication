@@ -17,19 +17,38 @@
                 <rect key="frame" x="0.0" y="0.0" width="174" height="174"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="10" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JuP-Lh-tTR">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="10" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JuP-Lh-tTR">
                         <rect key="frame" x="0.0" y="0.0" width="174" height="174"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aad-9k-QOp">
+                        <rect key="frame" x="150" y="8" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="yfO-ML-AkX"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain"/>
+                        <connections>
+                            <action selector="deleteImage:" destination="gTV-IL-0wX" eventType="touchUpInside" id="OUB-Xz-6sE"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" systemColor="systemGray6Color"/>
+            <constraints>
+                <constraint firstItem="JuP-Lh-tTR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Mmz-WA-1iE"/>
+                <constraint firstItem="JuP-Lh-tTR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="O1q-a5-8tG"/>
+                <constraint firstItem="JuP-Lh-tTR" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Oik-pc-AEq"/>
+                <constraint firstItem="JuP-Lh-tTR" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="YjX-NX-hfH"/>
+                <constraint firstItem="aad-9k-QOp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="ZyO-T5-Raj"/>
+                <constraint firstItem="JuP-Lh-tTR" firstAttribute="trailing" secondItem="aad-9k-QOp" secondAttribute="trailing" id="eD6-R7-kwA"/>
+            </constraints>
             <size key="customSize" width="196" height="121"/>
             <connections>
+                <outlet property="deleteImage" destination="aad-9k-QOp" id="IfS-MS-rZh"/>
                 <outlet property="docImage" destination="JuP-Lh-tTR" id="a0J-nQ-UyM"/>
             </connections>
-            <point key="canvasLocation" x="289.23076923076923" y="35.545023696682463"/>
+            <point key="canvasLocation" x="190.76923076923077" y="29.857819905213269"/>
         </collectionViewCell>
     </objects>
     <resources>
