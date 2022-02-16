@@ -21,7 +21,6 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var docTableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var secondLabel: UILabel!
-    @IBOutlet weak var editCategoryButton: UIButton!
     
     var imagePicker: ImagePicker!
     
@@ -47,14 +46,16 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         backButton.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        editCategoryButton.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
-        editCategoryButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        editCategoryButton.setImage(UIImage(systemName: "pencil"), for: .normal)
+
         addDocButton.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         addDocButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         addDocButton.setImage(UIImage(systemName: "plus"), for: .normal)
         
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        docTableView.reloadData()
     }
     
     @IBAction func addDocButton(_ sender: UIButton) {
@@ -68,11 +69,6 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
             sheetPresentationController.indexCellOfFirstTableView = indexCellOfFirstTableView
         }
         self.present(sheetPresentationController, animated: true, completion: nil)
-    }
-    
-    
-    @IBAction func editCategoryButton(_ sender: Any) {
-        
     }
     
     @IBAction func backButton(_ sender: UIButton) {
@@ -93,7 +89,7 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.idCategoryAfterTapButton = object.id
         cell.set(arrayOfImages: object.arrayOfImages.reversed(), nameLabel: object.nameOfCategory)
         cell.delegate = self
-        
+        cell.tableView = docTableView
         return cell
     }
     
@@ -109,6 +105,7 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
             [weak self] in // Capture list
             self?.docTableView.deleteRows(at: [indexPath], with: .fade)
             self?.docTableView.reloadData()
+                
             }
         }
     }
@@ -145,7 +142,7 @@ extension ObjectViewController: MyTableViewCellDelegate{
 extension ObjectViewController: ImagePickerDelegate {
     func didSelect(image: UIImage) {
         guard let imageConvertedToData = image.pngData() else { return }
-            dbManager.saveImage(image: imageConvertedToData, idCategory: idCategory, idUser: indexCellOfFirstTableView)
+        dbManager.saveImage(image: imageConvertedToData, idCategory: idCategory, idUser: indexCellOfFirstTableView)
             docTableView.reloadData()
 
     }

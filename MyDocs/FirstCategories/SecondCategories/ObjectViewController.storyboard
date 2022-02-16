@@ -51,15 +51,6 @@
                                     <action selector="addDocButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BVc-z6-F4m"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDY-t4-vhi">
-                                <rect key="frame" x="273" y="54" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
-                                <connections>
-                                    <action selector="editCategoryButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="iil-Aw-OqN"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -82,7 +73,6 @@
                         <outlet property="addDocButton" destination="0j9-z9-ZNn" id="WL3-G5-kmc"/>
                         <outlet property="backButton" destination="HBk-p6-O8S" id="ZWT-6d-90X"/>
                         <outlet property="docTableView" destination="lqE-UB-AVi" id="fzN-r8-wXp"/>
-                        <outlet property="editCategoryButton" destination="bDY-t4-vhi" id="mew-2T-NYv"/>
                         <outlet property="secondLabel" destination="j1U-4v-zj4" id="ix2-mT-SQc"/>
                     </connections>
                 </viewController>

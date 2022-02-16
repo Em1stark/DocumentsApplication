@@ -53,7 +53,6 @@ class CategoryImage: Object{
     @Persisted var idGrandParent: ObjectId
     @Persisted var image: Data
     
-    
     convenience init(image: Data, idParent: ObjectId, idGrandParent: ObjectId) {
         self.init()
         self.image = image

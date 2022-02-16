@@ -50,6 +50,15 @@
                             <action selector="addButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PbU-4N-6YM"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nS-cW-gLt">
+                        <rect key="frame" x="306" y="19" width="28" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain"/>
+                        <connections>
+                            <action selector="editCategoryButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fwZ-CE-TzG"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -57,6 +66,7 @@
             <connections>
                 <outlet property="addButtonTapped" destination="ysE-Q4-mQj" id="49a-cw-Z1y"/>
                 <outlet property="collectionView" destination="b7H-dQ-KKs" id="8oi-dc-ebA"/>
+                <outlet property="editCategoryButton" destination="8nS-cW-gLt" id="hpe-DI-vzG"/>
                 <outlet property="nameLabel" destination="5Fa-xF-UHZ" id="CbI-vb-QJp"/>
             </connections>
             <point key="canvasLocation" x="92.307692307692307" y="52.606635071090047"/>

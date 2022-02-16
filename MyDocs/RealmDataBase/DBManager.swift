@@ -15,6 +15,8 @@ protocol DBManager {
     
     func getCategoryFromData(id: ObjectId) -> Results<UserDocument>
     
+    func getImagesFromData() -> Results<CategoryImage>
+    
     func saveUser(face: String, definition: String)
     
     func saveCategory(nameText: String, index: ObjectId)
@@ -24,6 +26,8 @@ protocol DBManager {
     func deleteUser(realmDataBaseArray: Results<User>, index: ObjectId, completion: @escaping() -> Void ) // избегающее замыкание
     
     func deleteCategory(userDocumentsArray: Results<UserDocument>, index: ObjectId,  completion: @escaping() -> Void )
+    
+    func deleteImage(image: Results<CategoryImage>, index: ObjectId)
     
     func obtainUsers() -> [User]
     
@@ -47,6 +51,10 @@ class DBManagerImpl: DBManager{
         return mainRealm.objects(UserDocument.self).where({$0.idParent == id})
     }
     
+    func getImagesFromData() -> Results<CategoryImage>{
+        return mainRealm.objects(CategoryImage.self)
+
+    }
 
     func saveUser(face: String, definition: String){
         try! mainRealm.write{
@@ -97,6 +105,12 @@ class DBManagerImpl: DBManager{
             }
     }
     
+    func deleteImage(image: Results<CategoryImage>, index: ObjectId) {
+        let image = mainRealm.objects(CategoryImage.self)
+        try! mainRealm.write{
+            mainRealm.delete(image.first(where: {$0.id == index})!)
+        }
+    }
     
     func obtainUsers() -> [User] {
         let models = mainRealm.objects(User.self)
