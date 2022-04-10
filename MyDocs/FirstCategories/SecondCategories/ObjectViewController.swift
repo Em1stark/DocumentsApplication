@@ -21,6 +21,7 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var docTableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var secondLabel: UILabel!
+    @IBOutlet weak var editCategoryButton: UIButton!
     
     var imagePicker: ImagePicker!
     
@@ -28,7 +29,7 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var idCategory: ObjectId!
     var indexCellOfFirstTableView: ObjectId!
     var secondNameOfLabel: String = ""
-    
+    var value = true
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -50,7 +51,9 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         addDocButton.tintColor = UIColor(red: 0.117, green: 0.111, blue: 0.111, alpha: 1)
         addDocButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         addDocButton.setImage(UIImage(systemName: "plus"), for: .normal)
-        
+        editCategoryButton.tintColor = UIColor(red: 0.517, green: 0.511, blue: 0.511, alpha: 1)
+        editCategoryButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        editCategoryButton.setImage(UIImage(systemName: "circle.dashed"), for: .normal)
         
     }
     
@@ -75,6 +78,23 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         dismiss(animated: true, completion: nil)
     }
     
+    
+    @IBAction func editCategoryButton(_ sender: UIButton) {
+        let button = sender
+        if button.isSelected == true {
+            button.setImage(UIImage(systemName: "circle.dashed"), for: .normal)
+            button.isSelected = false
+            value = true
+            docTableView.reloadData()
+            } else {
+                button.setImage(UIImage(systemName: "circle.dashed.inset.filled"), for: .normal)
+                button.isSelected = true
+                value = false
+                docTableView.reloadData()
+            }
+        
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -90,6 +110,7 @@ class ObjectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.set(arrayOfImages: object.arrayOfImages.reversed(), nameLabel: object.nameOfCategory)
         cell.delegate = self
         cell.tableView = docTableView
+        cell.value = value
         return cell
     }
     

@@ -18,7 +18,6 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
     @IBOutlet weak var addButtonTapped: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var editCategoryButton: UIButton!
     
     var tableView: UITableView!
     
@@ -43,9 +42,6 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
         addButtonTapped.tintColor = UIColor(red: 0.517, green: 0.511, blue: 0.511, alpha: 1)
         addButtonTapped.setImage(UIImage(systemName: "camera.on.rectangle"), for: .normal)
         nameLabel.textColor = UIColor(red: 0.317, green: 0.311, blue: 0.311, alpha: 1)
-        editCategoryButton.tintColor = UIColor(red: 0.517, green: 0.511, blue: 0.511, alpha: 1)
-        editCategoryButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        editCategoryButton.setImage(UIImage(systemName: "circle.dashed"), for: .normal)
     }
     @IBAction func addButtonTapped(_ sender: UIButton) {
 
@@ -53,24 +49,6 @@ class CellForDocsTableView: UITableViewCell, UICollectionViewDataSource, UIColle
         collectionView.reloadData()
         }
     
-    @IBAction func editCategoryButton(_ sender: UIButton) {
-        let button = sender
-        if button.isSelected == true {
-            button.setImage(UIImage(systemName: "circle.dashed"), for: .normal)
-            button.isSelected = false
-            value = true
-            addButtonTapped.isEnabled = true
-            collectionView.reloadData()
-            } else {
-                button.setImage(UIImage(systemName: "circle.dashed.inset.filled"), for: .normal)
-                button.isSelected = true
-                value = false
-                addButtonTapped.isEnabled = false
-                collectionView.reloadData()
-            }
-        
-    
-    }
     override func prepareForReuse() {
         self.arrayOfImages = []
     }
